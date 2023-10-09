@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc5ebe14b4e7d454bb4835ff72d96e4c, type: 3}
+  m_Name: Gold
+  m_EditorClassIdentifier: 
+  id: InventoryItem_Gold
+  displayName: Gold
+  icon: {fileID: 1402339133, guid: c23ee0686fb187146bf0765346ac0b61, type: 3}
+  prefab: {fileID: 2387316454219507720, guid: eba90cc070c2bf74daa08af7bb1c4db0, type: 3}
+  referenceData: {fileID: 11400000}
+  itemEvent:
+    m_PersistentCalls:
+      m_Calls: []
