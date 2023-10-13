@@ -40,7 +40,7 @@ public class PlayerStats : MonoBehaviour
         else
         {
             isPlayerCanMove = false;
-            Debug.Log("Player cant move");
+            //Debug.Log("Player cant move");
         }
 
         //Handle Freeze
