@@ -6,6 +6,7 @@ public class CutsceneManager : MonoBehaviour
 {
     [Header("Atribut")]
     [SerializeField] bool isLiveScene;
+    [SerializeField] bool isHasDialogue;
 
     [Header("Before Cutscene")]
     public GameObject[] befcutObjToSetActive;
@@ -35,6 +36,12 @@ public class CutsceneManager : MonoBehaviour
         {
             PlayerStats.instance.isPlayerInteract = true;
             playerAudioListener.enabled = false;
+        }
+
+        if (isHasDialogue)
+        {
+            DialogueTrigger dialogueTrigger = GetComponent<DialogueTrigger>();
+            dialogueTrigger.TriggerDialogue();
         }
 
         //Looping untuk mengaktifkan obj sebelum cutscene
@@ -69,5 +76,11 @@ public class CutsceneManager : MonoBehaviour
         {
             afcutObjToSetInactive[i].SetActive(false);
         }
+    }
+
+    public void StopState()
+    {
+        Animator animator = GetComponent<Animator>();
+        animator.SetBool("NextState", false);
     }
 }

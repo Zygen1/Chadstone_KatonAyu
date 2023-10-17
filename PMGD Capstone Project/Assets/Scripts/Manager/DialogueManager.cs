@@ -7,17 +7,22 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    public bool isDialogueCutscene;
+
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogue;
     public Animator animator;
 
     [Header("UI")]
-    [SerializeField] GameObject UIControl;
-    [SerializeField] GameObject UIStats;
+    [SerializeField] GameObject[] inactiveUIObjects;
+    /*[SerializeField] GameObject UIControl;
+    [SerializeField] GameObject UIStats;*/
 
     [SerializeField] private Queue<string> sentences;
     Dialogue currentDialogue;
     DialogueTrigger currentDialogueTrigger;
+    Animator currentCutsceneAnimator;
+    CutsceneManager currentCutsceneManager;
 
     bool nextDialogueInput;
     // Start is called before the first frame update
@@ -47,8 +52,12 @@ public class DialogueManager : MonoBehaviour
         currentDialogue = dialogue;
         currentDialogueTrigger = dialogueTrigger;
         PlayerStats.instance.isPlayerDialogue = true;
-        UIControl.SetActive(false);
-        UIStats.SetActive(false);
+        /*UIControl.SetActive(false);
+        UIStats.SetActive(false);*/
+        for(int i = 0; i < inactiveUIObjects.Length; i++)
+        {
+            inactiveUIObjects[i].SetActive(false);
+        }
 
         animator.SetBool("IsOpen", true);
 
@@ -64,6 +73,36 @@ public class DialogueManager : MonoBehaviour
         DisplayNextSentence();
     }
 
+    public void StartCutsceneDialogue(Dialogue dialogue, DialogueTrigger dialogueTrigger, Animator cutsceneAnimator, CutsceneManager cutsceneManager)
+    {
+
+        //Setup
+        currentDialogue = dialogue;
+        currentDialogueTrigger = dialogueTrigger;
+        PlayerStats.instance.isPlayerDialogue = true;
+        /*UIControl.SetActive(false);
+        UIStats.SetActive(false);*/
+        for (int i = 0; i < inactiveUIObjects.Length; i++)
+        {
+            inactiveUIObjects[i].SetActive(false);
+        }
+        currentCutsceneAnimator = cutsceneAnimator;
+        currentCutsceneManager = cutsceneManager;
+
+        animator.SetBool("IsOpen", true);
+
+        nameText.text = currentDialogue.name;
+
+        sentences.Clear();
+
+        foreach (string sentence in currentDialogue.sentences)
+        {
+            sentences.Enqueue(sentence);
+        }
+
+        DisplayNextSentence();
+    }
+
     [ContextMenu("Display Next Dialogue")]
     public void DisplayNextSentence()
     {
@@ -71,6 +110,12 @@ public class DialogueManager : MonoBehaviour
         {
             EndDialogue();
             return;
+        }
+
+        if(isDialogueCutscene)
+        {
+            currentCutsceneAnimator.SetBool("NextState", true);
+            Debug.Log("lanjut state");
         }
 
         string sentence = sentences.Dequeue();
@@ -120,11 +165,20 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
+        if (isDialogueCutscene)
+        {
+            currentCutsceneManager.AfterCutscene();
+        }
+
         //Setup
         animator.SetBool("IsOpen", false);
         PlayerStats.instance.isPlayerDialogue = false;
         PlayerStats.instance.isPlayerInteract = false;
-        UIControl.SetActive(true);
-        UIStats.SetActive(true);
+        /*UIControl.SetActive(true);
+        UIStats.SetActive(true);*/
+        for (int i = 0; i < inactiveUIObjects.Length; i++)
+        {
+            inactiveUIObjects[i].SetActive(true);
+        }
     }
 }
