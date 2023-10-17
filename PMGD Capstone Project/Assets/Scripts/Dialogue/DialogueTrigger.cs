@@ -6,6 +6,8 @@ public enum TriggerMethod { TRIGGER, DIALOGUE_INTERACT}
 //[RequireComponent(typeof(DialogueTrigger))]
 public class DialogueTrigger : MonoBehaviour
 {
+    public bool isCutsceneDialogue;
+
     public TriggerMethod triggerMethod;
     public int currentDialogue;
     public Dialogue[] dialogue;
@@ -57,7 +59,15 @@ public class DialogueTrigger : MonoBehaviour
     public void TriggerDialogue()
     {
         //FindObjectOfType<DialogueManager>().StartDialogue(dialogue[dialogueHandler.currentDialogue]);
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue[currentDialogue], this);
+        if (isCutsceneDialogue)
+        {
+            DialogueManager cutsceneDialogueManager = GetComponentInParent<DialogueManager>();
+            cutsceneDialogueManager.StartCutsceneDialogue(dialogue[currentDialogue], this, GetComponent<Animator>(), GetComponent<CutsceneManager>());
+        }
+        else
+        {
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogue[currentDialogue], this);
+        }
         Debug.Log("Dialogue Is Started");
     }
 }
