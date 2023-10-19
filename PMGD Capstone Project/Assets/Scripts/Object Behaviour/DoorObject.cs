@@ -4,18 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum DoorAction { CHANGE_SCENE, ANIMATION, TELEPORT };
-public enum LockType { NONE, ITEM, PUZZLE };
+public enum LockType { NONE, ITEM, PUZZLE, SWITCH };
 public class DoorObject : MonoBehaviour
 {
     [Header("Option")]
     [HideInInspector] public LockType lockType;
 
+    //Locktype Item
     [HideInInspector] public string[] itemName;
     private int itemUnlock;
     [HideInInspector] public bool destroyItem;
     [HideInInspector] public DestroyItemInventory destroyItemInventory;
 
+    //Locktype Puzzle
     [HideInInspector] public string puzzleName;
+
+    //Locktype Switch
+    [HideInInspector] public SwitchObject[] switchList;
+    private int switchUnlock;
 
     [Header("Action")]
     [HideInInspector] public DoorAction action;
@@ -30,8 +36,14 @@ public class DoorObject : MonoBehaviour
     GameObject player;
     [HideInInspector] public GameObject teleportPos;
 
-    InteractableObject interactableObject;
+    [Header("Option")]
+    [Tooltip("Set Inactive Object when unlocked")] public bool disableOnUnlock;
+    public GameObject objToSetInactive;
+
+    [Header("Debug")]
     [SerializeField] bool unlocked;
+
+    InteractableObject interactableObject;
     bool interactIsDone;
     bool isOpen;
 
@@ -39,7 +51,7 @@ public class DoorObject : MonoBehaviour
     {
         interactableObject = GetComponent<InteractableObject>();
         animator = GetComponent<Animator>();
-        if(action == DoorAction.TELEPORT)
+        if (action == DoorAction.TELEPORT)
         {
             player = GameObject.FindGameObjectWithTag("Player");
         }
@@ -53,7 +65,7 @@ public class DoorObject : MonoBehaviour
             destroyItemInventory = GetComponent<DestroyItemInventory>();
         }
 
-        if(lockType == LockType.NONE)
+        if (lockType == LockType.NONE)
         {
             unlocked = true;
         }
@@ -70,9 +82,14 @@ public class DoorObject : MonoBehaviour
                 HandleItemUnlock();
             }
             //Lock type puzzle
-            else if(lockType == LockType.PUZZLE)
+            if (lockType == LockType.PUZZLE)
             {
                 HandlePuzzleUnlock();
+            }
+            //Lock type switch
+            if(lockType == LockType.SWITCH)
+            {
+                HandleSwitchUnlock();
             }
 
             PerformAction();
@@ -87,27 +104,32 @@ public class DoorObject : MonoBehaviour
             {
                 ChangeSceneAction();
             }
-            else if (action == DoorAction.ANIMATION)
+            
+            if (action == DoorAction.ANIMATION)
             {
                 AnimationAction();
             }
-            if(action == DoorAction.TELEPORT)
+            
+            if (action == DoorAction.TELEPORT)
             {
                 TeleportAction();
             }
+
         }
     }
 
     void TeleportAction()
     {
         player.transform.position = teleportPos.transform.position;
-        HandleInteraction();
+        //HandleInteraction();
+        interactableObject.HandleInteraction();
     }
 
     void ChangeSceneAction()
     {
         GameManager.instance.ChangeScene(sceneName);
-        HandleInteraction();
+        //HandleInteraction();
+        interactableObject.HandleInteraction();
     }
 
     void AnimationAction()
@@ -122,14 +144,48 @@ public class DoorObject : MonoBehaviour
             animator.SetBool("Open", false);
         }
 
-        HandleInteraction();
+        //HandleInteraction();
+        interactableObject.HandleInteraction();
     }
 
-    void HandleInteraction()
+    IEnumerator DisableObjectAction()
+    {
+        //HandleInteraction();
+        interactableObject.HandleInteraction();
+
+        // Dapatkan komponen SpriteRenderer dari objek yang akan dinonaktifkan
+        SpriteRenderer spriteRenderer = objToSetInactive.GetComponent<SpriteRenderer>();
+
+        // Inisialisasi alpha menjadi 1 (tidak transparan)
+        float alpha = 1f;
+
+        // Lintasan berkurangnya alpha per detik
+        float alphaReductionRate = 0.5f; // Sesuaikan dengan kecepatan yang Anda inginkan
+
+        // Loop sampai alpha mencapai 0
+        while (alpha > 0)
+        {
+            // Kurangi alpha
+            alpha -= alphaReductionRate * Time.deltaTime;
+
+            // Atur alpha ke SpriteRenderer
+            spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, alpha);
+
+            // Tunggu frame selanjutnya
+            yield return null;
+        }
+
+        // Setelah alpha mencapai 0, nonaktifkan objek
+        objToSetInactive.SetActive(false);
+        unlocked = true;
+    }
+
+
+    /*void HandleInteraction()
     {
         PlayerStats.instance.isPlayerInteract = false;
         interactableObject.isInteracted = false;
-    }
+    }*/
 
     void HandlePuzzleUnlock()
     {
@@ -138,21 +194,30 @@ public class DoorObject : MonoBehaviour
             PuzzleStats puzzleStats = PuzzleManager.instance.puzzleStats[i];
             if (puzzleStats.puzzleName == puzzleName && puzzleStats.isDone)
             {
-                unlocked = true;
+
+                if (disableOnUnlock)
+                {
+                    StartCoroutine(DisableObjectAction());
+                }
+                else
+                {
+                    unlocked = true;
+                }
             }
             else if (puzzleStats.puzzleName == puzzleName && !puzzleStats.isDone)
             {
                 Debug.Log("Puzzle is not done");
-                HandleInteraction();
+                //HandleInteraction();
+                interactableObject.HandleInteraction();
             }
         }
     }
 
     void HandleItemUnlock()
     {
-        for(int i = 0; i < itemName.Length; i++)
+        for (int i = 0; i < itemName.Length; i++)
         {
-            if(InventorySystem.instance.SearchItemInInventory(itemName[i]) == true)
+            if (InventorySystem.instance.SearchItemInInventory(itemName[i]) == true)
             {
                 itemUnlock++;
                 if (destroyItem)
@@ -164,14 +229,52 @@ public class DoorObject : MonoBehaviour
             }
         }
 
-        if(itemUnlock == itemName.Length)
+        if (itemUnlock == itemName.Length)
         {
-            unlocked = true;
+            if (disableOnUnlock)
+            {
+                StartCoroutine(DisableObjectAction());
+            }
+            else
+            {
+                unlocked = true;
+            }
         }
         else
         {
             Debug.Log("Item Not Found");
-            HandleInteraction();
+            //HandleInteraction();
+            interactableObject.HandleInteraction();
+        }
+    }
+
+    void HandleSwitchUnlock()
+    {
+        for(int i = 0; i < switchList.Length; i++)
+        {
+            if (switchList[i].isOn)
+            {
+                switchUnlock++;
+            }
+            else
+            {
+                switchUnlock = 0;
+                unlocked = false;
+                interactableObject.HandleInteraction();
+                return;
+            }
+        }
+
+        if(switchUnlock == switchList.Length)
+        {
+            if (disableOnUnlock)
+            {
+                StartCoroutine(DisableObjectAction());
+            }
+            else
+            {
+                unlocked = true;
+            }
         }
     }
 }
