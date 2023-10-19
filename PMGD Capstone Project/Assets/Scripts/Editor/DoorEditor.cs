@@ -51,6 +51,27 @@ public class DoorObjectEditor : Editor
         {
             door.puzzleName = EditorGUILayout.TextField("Puzzle Name", door.puzzleName);
         }
+        else if (door.lockType == LockType.SWITCH)
+        {
+            EditorGUILayout.LabelField("Switch Settings", EditorStyles.boldLabel);
+            int switchCount = EditorGUILayout.IntField("Switch Count", door.switchList.Length);
+
+            if (switchCount != door.switchList.Length)
+            {
+                // Inisialisasi ulang array switchList dengan panjang yang baru
+                SwitchObject[] newSwitchList = new SwitchObject[switchCount];
+                for (int i = 0; i < Mathf.Min(switchCount, door.switchList.Length); i++)
+                {
+                    newSwitchList[i] = door.switchList[i];
+                }
+                door.switchList = newSwitchList;
+            }
+
+            for (int i = 0; i < door.switchList.Length; i++)
+            {
+                door.switchList[i] = (SwitchObject)EditorGUILayout.ObjectField("Switch " + i, door.switchList[i], typeof(SwitchObject), true);
+            }
+        }
 
         door.action = (DoorAction)EditorGUILayout.EnumPopup("Door Action", door.action);
 

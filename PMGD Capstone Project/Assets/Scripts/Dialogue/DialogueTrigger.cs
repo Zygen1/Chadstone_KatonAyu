@@ -66,7 +66,9 @@ public class DialogueTrigger : MonoBehaviour
         }
         else
         {
-            FindObjectOfType<DialogueManager>().StartDialogue(dialogue[currentDialogue], this);
+            //FindObjectOfType<DialogueManager>().StartDialogue(dialogue[currentDialogue], this);
+            DialogueManager dialogueManager = GameObject.FindGameObjectWithTag("DialogueManager").GetComponent<DialogueManager>();
+            dialogueManager.StartDialogue(dialogue[currentDialogue], this);
         }
         Debug.Log("Dialogue Is Started");
     }
