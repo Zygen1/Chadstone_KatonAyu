@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(InteractableObject))]
-public class SwitchObject : MonoBehaviour
+public class ObjectGiveItem : MonoBehaviour
 {
-    public bool isOn;
+    [SerializeField] InventoryItemData referenceItem;
+
 
     InteractableObject interactableObject;
+    bool hasGivenItem;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +22,12 @@ public class SwitchObject : MonoBehaviour
     {
         if (interactableObject.isInteracted)
         {
-            isOn = !isOn;
+            if(hasGivenItem == false)
+            {
+                InventorySystem.instance.Add(referenceItem);
+                Debug.Log("Kamu dapat: " + referenceItem.name);
+                hasGivenItem = true;
+            }
             interactableObject.StopInteract();
         }
     }

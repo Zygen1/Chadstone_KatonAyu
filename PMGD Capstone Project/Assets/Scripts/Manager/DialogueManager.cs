@@ -7,6 +7,8 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    public static DialogueManager instance;
+
     public bool isDialogueCutscene;
 
     public TextMeshProUGUI nameText;
@@ -25,6 +27,11 @@ public class DialogueManager : MonoBehaviour
     CutsceneManager currentCutsceneManager;
 
     bool nextDialogueInput;
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

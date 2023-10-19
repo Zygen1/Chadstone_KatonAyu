@@ -4,7 +4,7 @@ public class InteractableObject : MonoBehaviour
 {
     public bool isInteracted;
 
-    public void HandleInteraction()
+    public void StopInteract()
     {
         PlayerStats.instance.isPlayerInteract = false;
         isInteracted = false;

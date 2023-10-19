@@ -122,14 +122,14 @@ public class DoorObject : MonoBehaviour
     {
         player.transform.position = teleportPos.transform.position;
         //HandleInteraction();
-        interactableObject.HandleInteraction();
+        interactableObject.StopInteract();
     }
 
     void ChangeSceneAction()
     {
         GameManager.instance.ChangeScene(sceneName);
         //HandleInteraction();
-        interactableObject.HandleInteraction();
+        interactableObject.StopInteract();
     }
 
     void AnimationAction()
@@ -145,13 +145,13 @@ public class DoorObject : MonoBehaviour
         }
 
         //HandleInteraction();
-        interactableObject.HandleInteraction();
+        interactableObject.StopInteract();
     }
 
     IEnumerator DisableObjectAction()
     {
         //HandleInteraction();
-        interactableObject.HandleInteraction();
+        interactableObject.StopInteract();
 
         // Dapatkan komponen SpriteRenderer dari objek yang akan dinonaktifkan
         SpriteRenderer spriteRenderer = objToSetInactive.GetComponent<SpriteRenderer>();
@@ -208,7 +208,7 @@ public class DoorObject : MonoBehaviour
             {
                 Debug.Log("Puzzle is not done");
                 //HandleInteraction();
-                interactableObject.HandleInteraction();
+                interactableObject.StopInteract();
             }
         }
     }
@@ -244,7 +244,7 @@ public class DoorObject : MonoBehaviour
         {
             Debug.Log("Item Not Found");
             //HandleInteraction();
-            interactableObject.HandleInteraction();
+            interactableObject.StopInteract();
         }
     }
 
@@ -260,7 +260,7 @@ public class DoorObject : MonoBehaviour
             {
                 switchUnlock = 0;
                 unlocked = false;
-                interactableObject.HandleInteraction();
+                interactableObject.StopInteract();
                 return;
             }
         }
