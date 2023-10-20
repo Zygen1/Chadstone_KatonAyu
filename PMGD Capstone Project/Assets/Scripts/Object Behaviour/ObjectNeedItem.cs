@@ -2,75 +2,96 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AfterGetItemAction { NONE, CHANGE_DIALOGUE}
-
 [RequireComponent(typeof(InteractableObject))]
 public class ObjectNeedItem : MonoBehaviour
 {
-    [SerializeField] string itemName;
-    [SerializeField] bool destroyItem;
-    [SerializeField] DestroyItemInventory destroyItemInventory;
-    [SerializeField] bool destroyThisObj;
+    [Header("Option")]
+    [HideInInspector] public string itemName;
+    [HideInInspector] public bool destroyItem;
+    [HideInInspector] public bool isASwitchObj;
+    [HideInInspector] public SwitchObject switchObject;
 
-    
-    [SerializeField] AfterGetItemAction afterGetItemAction;
-    [Tooltip("Force start dialogue after obj get item")]
-    [SerializeField] bool forceStart;
-    
+    [Header("Change Dialogue")]
+    [HideInInspector] public bool isChangeDialogue;
+    [HideInInspector] public bool isParentDialogue;
+    [HideInInspector] public DialogueTrigger dialogueTrigger;
+    [HideInInspector] public bool forceStart;
+
+    [Header("Activate Obj")]
+    [HideInInspector] public bool isActivateObj;
+    [HideInInspector] public GameObject objToActivate;
+
     [Header("Requirement")]
-    InteractableObject interactableObject;
-    //DialogueHandler dialogueHandler;
-    DialogueTrigger dialogueTrigger;
+    private InteractableObject interactableObject;
 
-    // Start is called before the first frame update
-    void Start()
+    [Header("Status")]
+    private bool isDone;
+
+    private void Start()
     {
         interactableObject = GetComponent<InteractableObject>();
 
-        if(afterGetItemAction == AfterGetItemAction.CHANGE_DIALOGUE)
+        if (isChangeDialogue)
         {
-            //dialogueHandler = GetComponentInParent<DialogueHandler>();
-            dialogueTrigger = GetComponentInParent<DialogueTrigger>();
+            if (isParentDialogue)
+            {
+                dialogueTrigger = GetComponentInParent<DialogueTrigger>();
+            }
+        }
+
+        if (isASwitchObj)
+        {
+            switchObject = GetComponent<SwitchObject>();
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (interactableObject.isInteracted)
+        if (!isDone)
         {
-            if(InventorySystem.instance.SearchItemInInventory(itemName) == true)
+            if (interactableObject.isInteracted)
             {
-                if (destroyItem)
+                if (InventorySystem.instance.SearchItemInInventory(itemName))
                 {
-                    destroyItemInventory.DestroyItem(itemName);
-                }
-
-                if (afterGetItemAction == AfterGetItemAction.CHANGE_DIALOGUE)
-                {
-                    dialogueTrigger.currentDialogue++;
-                    if (forceStart)
-                    {
-                        dialogueTrigger.TriggerDialogue();
-                    }
-                }
-
-                if (destroyThisObj)
-                {
-                    Destroy(gameObject);
+                    HandleItemFound();
                 }
                 else
                 {
-                    gameObject.SetActive(false);
+                    Debug.Log("Item not found");
                 }
             }
-            else
-            {
-                Debug.Log("Item not found");
-            }
-
-            interactableObject.isInteracted = false;
-            PlayerStats.instance.isPlayerInteract = false;
         }
+
+        interactableObject.StopInteract();
+    }
+
+    private void HandleItemFound()
+    {
+        if (destroyItem)
+        {
+            InventoryItem inventoryItem = InventorySystem.instance.GetReferenceItemDataInInventory(itemName);
+            InventorySystem.instance.Remove(inventoryItem.data.referenceData);
+        }
+
+        if (isChangeDialogue)
+        {
+            dialogueTrigger.currentDialogue++;
+            if (forceStart)
+            {
+                dialogueTrigger.TriggerDialogue();
+            }
+        }
+
+        if (isActivateObj)
+        {
+            objToActivate.SetActive(true);
+        }
+
+        if (isASwitchObj)
+        {
+            switchObject.isOn = true;
+        }
+
+        isDone = true;
     }
 }

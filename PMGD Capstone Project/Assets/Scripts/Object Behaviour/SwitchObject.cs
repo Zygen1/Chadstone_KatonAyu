@@ -5,6 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(InteractableObject))]
 public class SwitchObject : MonoBehaviour
 {
+    [Header("Option")]
+    [SerializeField] bool isOneShootInteract;
+    [SerializeField] bool isSetOnWhenInteract;
+
+    [Header("Status")]
     public bool isOn;
 
     InteractableObject interactableObject;
@@ -20,8 +25,15 @@ public class SwitchObject : MonoBehaviour
     {
         if (interactableObject.isInteracted)
         {
-            isOn = !isOn;
-            interactableObject.StopInteract();
+            if (isSetOnWhenInteract)
+            {
+                isOn = !isOn;
+            }
+
+            if (isOneShootInteract)
+            {
+                interactableObject.StopInteract();
+            }
         }
     }
 }
