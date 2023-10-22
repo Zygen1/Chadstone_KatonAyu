@@ -40,6 +40,10 @@ public class PlayerInteract : MonoBehaviour
                     currentInteractableOBJ = interactable_object;
                     break;
                 }
+                else
+                {
+                    currentInteractableOBJ = null;
+                }
             }
         }
 
@@ -58,6 +62,8 @@ public class PlayerInteract : MonoBehaviour
             {
                 interactInput = false;
             }
+
+            Debug.Log("INT VAL: " + interact_btn_value);
         }
     }
 
@@ -72,6 +78,7 @@ public class PlayerInteract : MonoBehaviour
             {
                 InteractableObject interactable_object = currentInteractableOBJ.GetComponent<InteractableObject>();
                 interactable_object.isInteracted = true;
+                //interactable_object.isInteracted = !interactable_object.isInteracted;
             }
             else
             {
