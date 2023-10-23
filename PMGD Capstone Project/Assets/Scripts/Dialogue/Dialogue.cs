@@ -15,6 +15,7 @@ public class Dialogue
 
     [Header("After Dialogue Activate Obj")]
     public GameObject objToActivate;
+    public bool nextDialogueAfterActivate;
 
     [Header("After Dialogue Need Item")]
     public string itemName;

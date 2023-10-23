@@ -147,7 +147,11 @@ public class DialogueManager : MonoBehaviour
             if (currentDialogue.afterDialogue == AfterDialogue.ACTIVATE_OBJ)
             {
                 currentDialogue.objToActivate.SetActive(true);
-                currentDialogueTrigger.currentDialogue++;
+
+                if (currentDialogue.nextDialogueAfterActivate)
+                {
+                    currentDialogueTrigger.currentDialogue++;
+                }
 
                 if (currentDialogue.isForceStart)
                 {
