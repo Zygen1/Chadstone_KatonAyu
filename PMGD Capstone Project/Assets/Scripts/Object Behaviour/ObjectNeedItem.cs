@@ -47,22 +47,21 @@ public class ObjectNeedItem : MonoBehaviour
 
     private void Update()
     {
-        if (!isDone)
+
+        if (interactableObject.isInteracted)
         {
-            if (interactableObject.isInteracted)
+            if (InventorySystem.instance.SearchItemInInventory(itemName))
             {
-                if (InventorySystem.instance.SearchItemInInventory(itemName))
-                {
-                    HandleItemFound();
-                }
-                else
-                {
-                    Debug.Log("Item not found");
-                }
+                HandleItemFound();
             }
+            else
+            {
+                Debug.Log("Item not found");
+            }
+            interactableObject.StopInteract();
         }
 
-        interactableObject.StopInteract();
+
     }
 
     private void HandleItemFound()
