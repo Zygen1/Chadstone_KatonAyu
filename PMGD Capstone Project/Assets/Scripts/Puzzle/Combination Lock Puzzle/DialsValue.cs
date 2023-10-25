@@ -40,7 +40,6 @@ public class DialsValue : MonoBehaviour
             dialsValue = 0;
         }
 
-        combinationLock.SetDialValue(dialsValue);
         Debug.Log("pencet");
     }
 }

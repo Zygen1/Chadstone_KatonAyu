@@ -6,9 +6,6 @@ using UnityEngine;
 public class CombinationLockPuzzle : MonoBehaviour
 {
     public int[] password;
-    //public GameObject[] dials;
-
-    //[SerializeField] private int[] currentCombination;
 
     [SerializeField] DialsValue[] dialsValue;
 
@@ -23,7 +20,7 @@ public class CombinationLockPuzzle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //currentCombination = new int[dials.Length];
+        
     }
 
     // Update is called once per frame
@@ -44,17 +41,7 @@ public class CombinationLockPuzzle : MonoBehaviour
             {
                 return false;
             }
-            
-            /*if (currentCombination[i] != password[i])
-            {
-                return false;
-            }*/
         }
         return true;
-    }
-
-    internal void SetDialValue(int dialsValue)
-    {
-        
     }
 }
