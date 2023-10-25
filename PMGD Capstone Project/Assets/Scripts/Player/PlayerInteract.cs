@@ -63,7 +63,7 @@ public class PlayerInteract : MonoBehaviour
                 interactInput = false;
             }
 
-            Debug.Log("INT VAL: " + interact_btn_value);
+            //Debug.Log("INT VAL: " + interact_btn_value);
         }
     }
 
