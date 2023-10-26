@@ -87,7 +87,7 @@ public class DoorObject : MonoBehaviour
                 HandlePuzzleUnlock();
             }
             //Lock type switch
-            if(lockType == LockType.SWITCH)
+            if (lockType == LockType.SWITCH)
             {
                 HandleSwitchUnlock();
             }
@@ -104,12 +104,12 @@ public class DoorObject : MonoBehaviour
             {
                 ChangeSceneAction();
             }
-            
+
             if (action == DoorAction.ANIMATION)
             {
                 AnimationAction();
             }
-            
+
             if (action == DoorAction.TELEPORT)
             {
                 TeleportAction();
@@ -121,14 +121,12 @@ public class DoorObject : MonoBehaviour
     void TeleportAction()
     {
         player.transform.position = teleportPos.transform.position;
-        //HandleInteraction();
         interactableObject.StopInteract();
     }
 
     void ChangeSceneAction()
     {
         GameManager.instance.ChangeScene(sceneName);
-        //HandleInteraction();
         interactableObject.StopInteract();
     }
 
@@ -144,34 +142,25 @@ public class DoorObject : MonoBehaviour
             animator.SetBool("Open", false);
         }
 
-        //HandleInteraction();
         interactableObject.StopInteract();
     }
 
     IEnumerator DisableObjectAction()
     {
-        //HandleInteraction();
         interactableObject.StopInteract();
 
-        // Dapatkan komponen SpriteRenderer dari objek yang akan dinonaktifkan
         SpriteRenderer spriteRenderer = objToSetInactive.GetComponent<SpriteRenderer>();
 
-        // Inisialisasi alpha menjadi 1 (tidak transparan)
         float alpha = 1f;
-
-        // Lintasan berkurangnya alpha per detik
-        float alphaReductionRate = 0.5f; // Sesuaikan dengan kecepatan yang Anda inginkan
+        float alphaReductionRate = 0.5f;
 
         // Loop sampai alpha mencapai 0
         while (alpha > 0)
         {
-            // Kurangi alpha
             alpha -= alphaReductionRate * Time.deltaTime;
 
-            // Atur alpha ke SpriteRenderer
             spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, alpha);
 
-            // Tunggu frame selanjutnya
             yield return null;
         }
 
@@ -179,13 +168,6 @@ public class DoorObject : MonoBehaviour
         objToSetInactive.SetActive(false);
         unlocked = true;
     }
-
-
-    /*void HandleInteraction()
-    {
-        PlayerStats.instance.isPlayerInteract = false;
-        interactableObject.isInteracted = false;
-    }*/
 
     void HandlePuzzleUnlock()
     {
@@ -206,8 +188,10 @@ public class DoorObject : MonoBehaviour
             }
             else if (puzzleStats.puzzleName == puzzleName && !puzzleStats.isDone)
             {
-                Debug.Log("Puzzle is not done");
-                //HandleInteraction();
+                //NOTIFIKASI ///////////////////////////////////////////////////////
+                Debug.Log("Locked");
+                //END NOTIFIKASI ///////////////////////////////////////////////////
+
                 interactableObject.StopInteract();
             }
         }
@@ -242,15 +226,18 @@ public class DoorObject : MonoBehaviour
         }
         else
         {
-            Debug.Log("Item Not Found");
-            //HandleInteraction();
+            //NOTIFIKASI ///////////////////////////////////////////////////////
+            Debug.Log("Locked");
+            //END NOTIFIKASI ///////////////////////////////////////////////////
+
+
             interactableObject.StopInteract();
         }
     }
 
     void HandleSwitchUnlock()
     {
-        for(int i = 0; i < switchList.Length; i++)
+        for (int i = 0; i < switchList.Length; i++)
         {
             if (switchList[i].isOn)
             {
@@ -258,6 +245,10 @@ public class DoorObject : MonoBehaviour
             }
             else
             {
+                //NOTIFIKASI ///////////////////////////////////////////////////////
+                Debug.Log("Locked");
+                //END NOTIFIKASI ///////////////////////////////////////////////////
+
                 switchUnlock = 0;
                 unlocked = false;
                 interactableObject.StopInteract();
@@ -265,7 +256,7 @@ public class DoorObject : MonoBehaviour
             }
         }
 
-        if(switchUnlock == switchList.Length)
+        if (switchUnlock == switchList.Length)
         {
             if (disableOnUnlock)
             {

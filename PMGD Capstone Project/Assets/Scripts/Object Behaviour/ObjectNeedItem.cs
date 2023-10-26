@@ -56,7 +56,9 @@ public class ObjectNeedItem : MonoBehaviour
             }
             else
             {
-                Debug.Log("Item not found");
+                //NOTIFIKASI ///////////////////////////////////////////////////////
+                Debug.Log("Need : " + itemName + " item");
+                //END NOTIFIKASI ///////////////////////////////////////////////////
             }
             interactableObject.StopInteract();
         }

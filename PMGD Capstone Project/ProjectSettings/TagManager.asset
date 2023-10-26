@@ -45,6 +45,9 @@ TagManager:
   - name: Background
     uniqueID: 3484790853
     locked: 0
+  - name: Items
+    uniqueID: 4272069571
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -53,9 +56,6 @@ TagManager:
     locked: 0
   - name: Puzzle
     uniqueID: 1558727753
-    locked: 0
-  - name: Items
-    uniqueID: 4272069571
     locked: 0
   - name: Hidden_Object
     uniqueID: 262178451

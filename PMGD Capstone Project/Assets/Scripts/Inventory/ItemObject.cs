@@ -24,6 +24,10 @@ public class ItemObject : MonoBehaviour
     [ContextMenu("Pick")]
     public void OnHandlePickupItem()
     {
+        //NOTIFIKASI ///////////////////////////////////////////////////////
+        Debug.Log("Get : " + referenceItem.name + " item");
+        //END NOTIFIKASI ///////////////////////////////////////////////////
+
         InventorySystem.instance.Add(referenceItem);
         PlayerStats.instance.isPlayerInteract = false;
         Destroy(gameObject);

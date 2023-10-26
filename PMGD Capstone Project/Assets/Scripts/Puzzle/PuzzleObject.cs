@@ -10,6 +10,7 @@ public class PuzzleObject : MonoBehaviour
     [HideInInspector] public string itemName;
     [HideInInspector] public bool destroyItem;
     [HideInInspector] public DestroyItemInventory destroyItemInventory;
+    public bool isDeactiveWhenDone;
 
     [Header("Requirment")]
     [HideInInspector] public GameObject realPuzzle;
@@ -44,6 +45,10 @@ public class PuzzleObject : MonoBehaviour
                     }
                     else
                     {
+                        //NOTIFIKASI ///////////////////////////////////////////////////////
+                        Debug.Log("Need : " + itemName + " item");
+                        //END NOTIFIKASI ///////////////////////////////////////////////////
+
                         interactableObject.isInteracted = false;
                         PlayerStats.instance.isPlayerInteract = false;
                     }
@@ -60,14 +65,26 @@ public class PuzzleObject : MonoBehaviour
         }
         else if (!interactableObject.isInteracted)
         {
+            if (puzzleStats.isDone)
+            {
+                if (isDeactiveWhenDone)
+                {
+                    interactableObject.StopInteract();
+                    gameObject.SetActive(false);
+                }
+            }
+
             realPuzzle.SetActive(false);
         }
 
         if (destroyItem && !itemIsDestroyed && puzzleStats.isDone)
         {
-            Debug.Log("Destroy item");
+            //Debug.Log("Destroy item");
             destroyItemInventory.DestroyItem(itemName);
             itemIsDestroyed = true;
         }
+
+
+        
     }
 }

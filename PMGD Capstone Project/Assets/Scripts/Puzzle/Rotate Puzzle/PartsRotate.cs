@@ -19,7 +19,8 @@ public class PartsRotate : MonoBehaviour
         {
             // Rotasi objek pada sumbu Z sebanyak rotateValue.
             transform.Rotate(0f, 0f, rotateValue);
-            Debug.Log("Rotate: " + gameObject.name);
         }
+
+        Debug.Log("Rotate: " + gameObject.name);
     }
 }
