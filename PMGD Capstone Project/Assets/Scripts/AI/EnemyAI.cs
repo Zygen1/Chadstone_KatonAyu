@@ -25,7 +25,7 @@ public class EnemyAI : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
-        InvokeRepeating("UpdatePath", 0f, .25f);
+        InvokeRepeating("UpdatePath", 0f, .2f);
         
     }
 

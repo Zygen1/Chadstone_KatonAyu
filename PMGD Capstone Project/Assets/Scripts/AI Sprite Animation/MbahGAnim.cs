@@ -10,6 +10,7 @@ public class MbahGAnim : MonoBehaviour
     private Animator animator;
     private float horizontalPosition;
     private float verticalPosition;
+    public GameObject target;
 
     void Start()
     {
@@ -23,13 +24,18 @@ public class MbahGAnim : MonoBehaviour
         CheckDirection();
     }
 
+    private void Update()
+    {
+        
+    }
+
     private void CheckDirection()
     {
-        horizontalPosition = enemyAI.GetDirection().x;
-        verticalPosition = enemyAI.GetDirection().y;
-
-        animator.SetFloat("Horizontal", horizontalPosition);
-        animator.SetFloat("Vertical", verticalPosition);
+        float xPosition =  target.transform.position.x - gameObject.transform.position.x ;
+        float yPosition = target.transform.position.y - gameObject.transform.position.y;
+        Debug.Log("X = " + xPosition + "Y = " + yPosition); 
+        animator.SetFloat("Horizontal", Mathf.Clamp(xPosition,-1,1));
+        animator.SetFloat("Vertical", Mathf.Clamp(yPosition, -1, 1));
         
     }
 
