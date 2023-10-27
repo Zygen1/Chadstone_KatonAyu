@@ -10,6 +10,8 @@ public class PuzzleObject : MonoBehaviour
     [HideInInspector] public string itemName;
     [HideInInspector] public bool destroyItem;
     [HideInInspector] public DestroyItemInventory destroyItemInventory;
+    [HideInInspector] public bool isChangeObjToInteractable;
+    [HideInInspector] public GameObject objToChange;
     public bool isDeactiveWhenDone;
 
     [Header("Requirment")]
@@ -65,12 +67,18 @@ public class PuzzleObject : MonoBehaviour
         }
         else if (!interactableObject.isInteracted)
         {
+            //Puzzle complete
             if (puzzleStats.isDone)
             {
                 if (isDeactiveWhenDone)
                 {
                     interactableObject.StopInteract();
                     gameObject.SetActive(false);
+                }
+
+                if (isChangeObjToInteractable)
+                {
+                    objToChange.tag = "InteractableObject";
                 }
             }
 

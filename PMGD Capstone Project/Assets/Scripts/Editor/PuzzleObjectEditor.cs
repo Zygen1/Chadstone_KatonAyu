@@ -30,6 +30,16 @@ public class PuzzleObjectEditor : Editor
             }
         }
 
+        puzzleObject.isChangeObjToInteractable = EditorGUILayout.Toggle("Change Object To Interactable", puzzleObject.isChangeObjToInteractable);
+
+        if (puzzleObject.isChangeObjToInteractable)
+        {
+            puzzleObject.objToChange = (GameObject)EditorGUILayout.ObjectField(
+                "Object To Change", puzzleObject.objToChange, typeof(GameObject), true);
+        }
+
+        puzzleObject.isDeactiveWhenDone = EditorGUILayout.Toggle("Deactivate When Done", puzzleObject.isDeactiveWhenDone);
+
         puzzleObject.realPuzzle = (GameObject)EditorGUILayout.ObjectField("Real Puzzle", puzzleObject.realPuzzle, typeof(GameObject), true);
         puzzleObject.puzzleStats = (PuzzleStats)EditorGUILayout.ObjectField("Puzzle Stats", puzzleObject.puzzleStats, typeof(PuzzleStats), true);
     }
