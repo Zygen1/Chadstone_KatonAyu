@@ -836,6 +836,8 @@ MonoBehaviour:
   label: {fileID: 6035110508264025726}
   stackOBJ: {fileID: 4959077462391854225}
   stackLabel: {fileID: 6350248852909064225}
+  currentEquipmentObject: {fileID: 0}
   equipmentStatus: {fileID: 1741966574685692312}
   equipStatus: {fileID: 3237773725781923791}
   unequipStatus: {fileID: 3268265493872411104}
+  isEquip: 0
