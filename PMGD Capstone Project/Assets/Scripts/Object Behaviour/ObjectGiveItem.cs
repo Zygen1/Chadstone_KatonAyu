@@ -26,9 +26,11 @@ public class ObjectGiveItem : MonoBehaviour
             {
                 InventorySystem.instance.Add(referenceItem);
                 Debug.Log("Kamu dapat: " + referenceItem.name);
+                NotificationUI.instance.AddObtainedItemSlot(referenceItem);
                 hasGivenItem = true;
             }
-            interactableObject.StopInteract();
+            
+            //interactableObject.StopInteract();
         }
     }
 }
