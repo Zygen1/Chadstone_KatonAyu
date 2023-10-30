@@ -9,8 +9,9 @@ public class EnemyAI : MonoBehaviour
 
     public Transform target;
 
-    public float speed = 200f;
+    public float speed;
     public float nextWayPointDistance = 3f;
+    private Vector2 direction;
 
     Path path;
     int currentWayPoint = 0;
@@ -24,7 +25,7 @@ public class EnemyAI : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
-        InvokeRepeating("UpdatePath", 0f, .25f);
+        InvokeRepeating("UpdatePath", 0f, .2f);
         
     }
 
@@ -63,11 +64,12 @@ public class EnemyAI : MonoBehaviour
             
         }
 
-        Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
+        direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
 
         Vector2 force = direction * speed * Time.deltaTime;
 
         rb.AddForce(force);
+        
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
 
@@ -77,4 +79,10 @@ public class EnemyAI : MonoBehaviour
         }
 
     }
+
+    public Vector2 GetDirection() 
+    {
+        return direction;
+    }
+
 }
