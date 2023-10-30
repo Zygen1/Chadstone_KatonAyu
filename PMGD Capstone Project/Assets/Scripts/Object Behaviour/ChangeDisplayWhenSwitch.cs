@@ -19,17 +19,6 @@ public class ChangeDisplayWhenSwitch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (switchObject.isOn)
-        {
-            display1.SetActive(false);
-            display2.SetActive(true);
-        }
-        else
-        {
-            display1.SetActive(false);
-            display2.SetActive(true);
-        }*/
-
         display1.SetActive(!switchObject.isOn);
         display2.SetActive(switchObject.isOn);
     }
