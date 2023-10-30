@@ -30,6 +30,7 @@ public class ItemObject : MonoBehaviour
 
         InventorySystem.instance.Add(referenceItem);
         PlayerStats.instance.isPlayerInteract = false;
+        NotificationUI.instance.AddObtainedItemSlot(referenceItem);
         Destroy(gameObject);
     }
 }
