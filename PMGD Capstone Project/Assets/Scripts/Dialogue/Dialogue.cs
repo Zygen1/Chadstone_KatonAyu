@@ -12,10 +12,10 @@ public class Dialogue
 
     [Tooltip("Force start next dialogue 'AfterDialogue' ")] 
     public bool isForceStart;
+    public bool nextDialogue;
 
     [Header("After Dialogue Activate Obj")]
     public GameObject objToActivate;
-    public bool nextDialogueAfterActivate;
 
     [Header("After Dialogue Need Item")]
     public string itemName;

@@ -148,7 +148,7 @@ public class DialogueManager : MonoBehaviour
             {
                 currentDialogue.objToActivate.SetActive(true);
 
-                if (currentDialogue.nextDialogueAfterActivate)
+                if (currentDialogue.nextDialogue)
                 {
                     currentDialogueTrigger.currentDialogue++;
                 }
@@ -172,6 +172,19 @@ public class DialogueManager : MonoBehaviour
                         currentDialogueTrigger.TriggerDialogue();
                         return;
                     }
+                }
+            }
+            else if(currentDialogue.afterDialogue == AfterDialogue.NONE)
+            {
+                if (currentDialogue.nextDialogue)
+                {
+                    currentDialogueTrigger.currentDialogue++;
+                }
+
+                if (currentDialogue.isForceStart)
+                {
+                    currentDialogueTrigger.TriggerDialogue();
+                    return;
                 }
             }
         }
