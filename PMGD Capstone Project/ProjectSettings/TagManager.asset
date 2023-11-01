@@ -48,10 +48,16 @@ TagManager:
   - name: Items
     uniqueID: 4272069571
     locked: 0
+  - name: Foreground_Back
+    uniqueID: 543194813
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Foreground
+  - name: Player
+    uniqueID: 3769847151
+    locked: 0
+  - name: Foreground_Front
     uniqueID: 2330805515
     locked: 0
   - name: Puzzle
