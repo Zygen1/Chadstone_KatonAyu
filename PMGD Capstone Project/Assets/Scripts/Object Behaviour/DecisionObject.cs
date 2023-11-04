@@ -50,6 +50,11 @@ public class DecisionObject : MonoBehaviour
         dt.enabled = false;
     }
 
+    public void TriggerObjectButton(InteractableObject io)
+    {
+        io.isInteracted = true;
+    }
+
     public void PlayerStopInteract()
     {
         for(int i = 0; i < activateObjWhenDecision.Length; i++)
