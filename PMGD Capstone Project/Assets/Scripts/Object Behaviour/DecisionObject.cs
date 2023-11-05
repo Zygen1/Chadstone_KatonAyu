@@ -25,6 +25,7 @@ public class DecisionObject : MonoBehaviour
                 deactiveObjWhenDecision[i].SetActive(false);
             }
 
+            PlayerStats.instance.isPlayerDialogue = true;
             PlayerStats.instance.isPlayerInteract = true;
             isActive = true;
         }
@@ -61,6 +62,8 @@ public class DecisionObject : MonoBehaviour
         {
             activateObjWhenDecision[i].SetActive(true);
         }
+
+        PlayerStats.instance.isPlayerDialogue = false;
         PlayerStats.instance.isPlayerInteract = false;
     }
 }
