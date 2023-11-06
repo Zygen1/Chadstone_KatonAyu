@@ -340,7 +340,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 689236311}
-        m_TargetAssemblyTypeName: Lemari, Assembly-CSharp
+        m_TargetAssemblyTypeName: Toggle, Assembly-CSharp
         m_MethodName: ChangeSprite
         m_Mode: 1
         m_Arguments:
