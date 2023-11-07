@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance;
     [SerializeField] Animator inventoryPanel;
     [SerializeField] bool isInventoryOpen;
     [SerializeField] bool toggleButtonCheck;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +26,7 @@ public class UIManager : MonoBehaviour
         KeyboardControl();
     }
 
+    [ContextMenu("Toggle Inventory")]
     public void ToggleInventoryPanel()
     {
         isInventoryOpen = !isInventoryOpen;

@@ -9,6 +9,11 @@ public class InteractableObject : MonoBehaviour
         PlayerStats.instance.isPlayerInteract = false;
         isInteracted = false;
     }
+
+    public void InteractObject()
+    {
+        isInteracted = true;
+    }
 }
 
 

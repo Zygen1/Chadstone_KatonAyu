@@ -14,6 +14,7 @@ public class InventoryItemData : ScriptableObject
 
     public bool isUseEvent;
     public UnityEvent itemEvent;
+    public bool dontDestroyWhenUse;
 
     public bool isAnEquipment;
     public string equipmentName;
