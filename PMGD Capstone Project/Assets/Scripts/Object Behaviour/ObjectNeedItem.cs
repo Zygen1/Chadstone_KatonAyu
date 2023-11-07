@@ -6,7 +6,8 @@ using UnityEngine;
 public class ObjectNeedItem : MonoBehaviour
 {
     [Header("Option")]
-    [HideInInspector] public string itemName;
+    [HideInInspector] public string[] itemName;
+    private int itemUnlock;
     [HideInInspector] public bool destroyItem;
     [HideInInspector] public bool isASwitchObj;
     [HideInInspector] public SwitchObject switchObject;
@@ -22,7 +23,7 @@ public class ObjectNeedItem : MonoBehaviour
     [HideInInspector] public GameObject objToActivate;
 
     [Header("Requirement")]
-    private InteractableObject interactableObject;
+    [HideInInspector] private InteractableObject interactableObject;
 
     [Header("Status")]
     private bool isDone;
@@ -47,33 +48,51 @@ public class ObjectNeedItem : MonoBehaviour
 
     private void Update()
     {
-
         if (interactableObject.isInteracted)
         {
-            if (InventorySystem.instance.SearchItemInInventory(itemName))
+            if (!isDone)
             {
-                HandleItemFound();
+                HandleSearchItem();
             }
-            else
-            {
-                //NOTIFIKASI ///////////////////////////////////////////////////////
-                Debug.Log("Need : " + itemName + " item");
-                //END NOTIFIKASI ///////////////////////////////////////////////////
-            }
+
             interactableObject.StopInteract();
         }
+    }
+
+    private void HandleSearchItem()
+    {
+        for (int i = 0; i < itemName.Length; i++)
+        {
+            if (InventorySystem.instance.SearchItemInInventory(itemName[i]) == true)
+            {
+                itemUnlock++;
+                if (destroyItem)
+                {
+                    InventoryItem inventoryItem = InventorySystem.instance.GetReferenceItemDataInInventory(itemName[i]);
+                    InventorySystem.instance.Remove(inventoryItem.data.referenceData);
+                }
+
+                itemName[i] = null;
+            }
+        }
+
+        if (itemUnlock == itemName.Length)
+        {
+            HandleItemFound();
+        }
+        else
+        {
+            //NOTIFIKASI ///////////////////////////////////////////////////////
+            Debug.Log("Need Item");
+            //END NOTIFIKASI ///////////////////////////////////////////////////
 
 
+            //interactableObject.StopInteract();
+        }
     }
 
     private void HandleItemFound()
     {
-        if (destroyItem)
-        {
-            InventoryItem inventoryItem = InventorySystem.instance.GetReferenceItemDataInInventory(itemName);
-            InventorySystem.instance.Remove(inventoryItem.data.referenceData);
-        }
-
         if (isChangeDialogue)
         {
             dialogueTrigger.currentDialogue++;
@@ -94,5 +113,6 @@ public class ObjectNeedItem : MonoBehaviour
         }
 
         isDone = true;
+        //interactableObject.StopInteract();
     }
 }

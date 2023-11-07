@@ -33,7 +33,7 @@ public class MbahGAnim : MonoBehaviour
     {
         float xPosition =  target.transform.position.x - gameObject.transform.position.x ;
         float yPosition = target.transform.position.y - gameObject.transform.position.y;
-        Debug.Log("X = " + xPosition + "Y = " + yPosition); 
+        //Debug.Log("X = " + xPosition + "Y = " + yPosition); 
         animator.SetFloat("Horizontal", Mathf.Clamp(xPosition,-1,1));
         animator.SetFloat("Vertical", Mathf.Clamp(yPosition, -1, 1));
         
