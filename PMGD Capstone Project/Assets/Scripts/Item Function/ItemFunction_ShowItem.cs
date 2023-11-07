@@ -10,6 +10,7 @@ public class ItemFunction_ShowItem : MonoBehaviour
     {
         UIManager.Instance.ToggleInventoryPanel();
         InteractableObject interactableObject = GameObject.Find(interactableObjName).GetComponent<InteractableObject>();
+        PlayerStats.instance.isPlayerInteract = true;
         interactableObject.isInteracted = true;
     }
 }

@@ -35,16 +35,19 @@ public class UIManager : MonoBehaviour
 
     void KeyboardControl()
     {
-        float toggleInventoryInput = InputManager.inputSystem.UI.ToggleInventory.ReadValue<float>();
+        if(PlayerStats.instance.isPlayerInteract == false)
+        {
+            float toggleInventoryInput = InputManager.inputSystem.UI.ToggleInventory.ReadValue<float>();
 
-        if (toggleInventoryInput > 0 && !toggleButtonCheck)
-        {
-            ToggleInventoryPanel();
-            toggleButtonCheck = true;
-        }
-        else if (toggleInventoryInput <= 0)
-        {
-            toggleButtonCheck = false;
+            if (toggleInventoryInput > 0 && !toggleButtonCheck)
+            {
+                ToggleInventoryPanel();
+                toggleButtonCheck = true;
+            }
+            else if (toggleInventoryInput <= 0)
+            {
+                toggleButtonCheck = false;
+            }
         }
     }
 }
