@@ -181,6 +181,8 @@ MonoBehaviour:
   forceStart: 1
   isActivateObj: 0
   objToActivate: {fileID: 0}
+  isGiveItem: 0
+  objGiveItem: {fileID: 0}
 --- !u!114 &5828083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2969,6 +2971,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   teleportPos: {fileID: 0}
   isUnlockAnim: 0
+  isUnlockDoor: 0
   lockObj: {fileID: 0}
   disableObjTime: 0
   unlockAnim: {fileID: 0}
@@ -6736,6 +6739,7 @@ GameObject:
   - component: {fileID: 285108427}
   - component: {fileID: 285108426}
   - component: {fileID: 285108430}
+  - component: {fileID: 285108431}
   m_Layer: 0
   m_Name: Statue
   m_TagString: InteractableObject
@@ -6773,6 +6777,7 @@ MonoBehaviour:
   itemName:
   - Wood
   - Gold
+  - Coin
   destroyItem: 1
   isASwitchObj: 1
   switchObject: {fileID: 285108426}
@@ -6782,6 +6787,8 @@ MonoBehaviour:
   forceStart: 0
   isActivateObj: 1
   objToActivate: {fileID: 1018961628}
+  isGiveItem: 1
+  objGiveItem: {fileID: 285108431}
 --- !u!114 &285108428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6858,6 +6865,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &285108431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285108425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab2c04dce456a4d469cd119d55fecd00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  referenceItem: {fileID: 11400000, guid: 6fffec69c74d6e646b07307d1bba50dd, type: 2}
+  isGiveFreeItem: 0
 --- !u!1 &286509356
 GameObject:
   m_ObjectHideFlags: 0
@@ -10467,7 +10488,7 @@ Transform:
   m_GameObject: {fileID: 436232159}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: -10.650001, z: 0}
+  m_LocalPosition: {x: -10.04, y: -17.63, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16259,6 +16280,8 @@ MonoBehaviour:
   forceStart: 1
   isActivateObj: 0
   objToActivate: {fileID: 0}
+  isGiveItem: 0
+  objGiveItem: {fileID: 0}
 --- !u!114 &669379818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17014,7 +17037,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1417666501}
   - {fileID: 1722754746}
   - {fileID: 1432653932}
   - {fileID: 1627909082}
@@ -17238,7 +17260,7 @@ Transform:
   m_GameObject: {fileID: 722493383}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.73, y: -10.73, z: 0}
+  m_LocalPosition: {x: 2.03, y: -17.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17259,6 +17281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   referenceItem: {fileID: 11400000, guid: 6fffec69c74d6e646b07307d1bba50dd, type: 2}
+  isGiveFreeItem: 1
 --- !u!114 &722493386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75999,7 +76022,7 @@ GameObject:
   m_Component:
   - component: {fileID: 827124717}
   - component: {fileID: 827124716}
-  - component: {fileID: 827124715}
+  - component: {fileID: 827124718}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -76007,26 +76030,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &827124715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 827124714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
 --- !u!114 &827124716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76057,6 +76060,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &827124718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827124714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
 --- !u!1 &832015547
 GameObject:
   m_ObjectHideFlags: 0
@@ -85788,6 +85821,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   teleportPos: {fileID: 0}
   isUnlockAnim: 0
+  isUnlockDoor: 0
   lockObj: {fileID: 0}
   disableObjTime: 0
   unlockAnim: {fileID: 0}
@@ -86636,6 +86670,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   teleportPos: {fileID: 2114362526}
   isUnlockAnim: 0
+  isUnlockDoor: 0
   lockObj: {fileID: 0}
   disableObjTime: 0
   unlockAnim: {fileID: 0}
@@ -87542,7 +87577,7 @@ Transform:
   m_GameObject: {fileID: 1236599778}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.12, y: -10.620002, z: 0}
+  m_LocalPosition: {x: -8.46, y: -17.69, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -92168,84 +92203,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1417666500
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1417666501}
-  - component: {fileID: 1417666503}
-  - component: {fileID: 1417666502}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1417666501
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1417666500}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1170, y: -515, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 699018231}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1417666502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1417666500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_MoveRepeatDelay: 0.5
-  m_MoveRepeatRate: 0.1
-  m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 0
-  m_CursorLockBehavior: 0
---- !u!114 &1417666503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1417666500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
 --- !u!1 &1422440118
 GameObject:
   m_ObjectHideFlags: 0
@@ -95393,7 +95350,7 @@ Transform:
   m_GameObject: {fileID: 1482351594}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.16, y: -10.64, z: 0}
+  m_LocalPosition: {x: -11.42, y: -17.61, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -99232,6 +99189,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   teleportPos: {fileID: 0}
   isUnlockAnim: 0
+  isUnlockDoor: 0
   lockObj: {fileID: 0}
   disableObjTime: 0
   unlockAnim: {fileID: 0}
@@ -102264,7 +102222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1708329537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103599,13 +103557,15 @@ MonoBehaviour:
   - Wood
   destroyItem: 1
   destroyItemInventory: {fileID: 1781454970}
-  puzzleName: 
-  switchList: []
+  puzzleName: Arrange Words
+  switchList:
+  - {fileID: 1482351598}
   action: 1
   sceneName: 
   animator: {fileID: 0}
   teleportPos: {fileID: 0}
   isUnlockAnim: 1
+  isUnlockDoor: 1
   lockObj: {fileID: 1465035157}
   disableObjTime: 1
   unlockAnim: {fileID: 463459106}
@@ -110975,11 +110935,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5581046559411095330, guid: 11e25628331e2454c87966c399380645, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.51
+      value: -19.26
       objectReference: {fileID: 0}
     - target: {fileID: 5581046559411095330, guid: 11e25628331e2454c87966c399380645, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -16.45
+      value: -14.87
       objectReference: {fileID: 0}
     - target: {fileID: 5581046559411095330, guid: 11e25628331e2454c87966c399380645, type: 3}
       propertyPath: m_LocalPosition.z

@@ -22,6 +22,10 @@ public class ObjectNeedItem : MonoBehaviour
     [HideInInspector] public bool isActivateObj;
     [HideInInspector] public GameObject objToActivate;
 
+    [Header("Give Item")]
+    public bool isGiveItem;
+    public ObjectGiveItem objGiveItem;
+
     [Header("Requirement")]
     [HideInInspector] private InteractableObject interactableObject;
 
@@ -110,6 +114,11 @@ public class ObjectNeedItem : MonoBehaviour
         if (isASwitchObj)
         {
             switchObject.isOn = true;
+        }
+
+        if (isGiveItem)
+        {
+            objGiveItem.GiveItem();
         }
 
         isDone = true;

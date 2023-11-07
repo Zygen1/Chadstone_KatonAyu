@@ -6,6 +6,7 @@ using UnityEngine;
 public class ObjectGiveItem : MonoBehaviour
 {
     [SerializeField] InventoryItemData referenceItem;
+    [SerializeField] bool isGiveFreeItem;
 
 
     InteractableObject interactableObject;
@@ -20,17 +21,25 @@ public class ObjectGiveItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (interactableObject.isInteracted)
+        if (isGiveFreeItem)
         {
-            if(hasGivenItem == false)
+            if (interactableObject.isInteracted)
             {
-                InventorySystem.instance.Add(referenceItem);
-                Debug.Log("Kamu dapat: " + referenceItem.name);
-                NotificationUI.instance.AddObtainedItemSlot(referenceItem);
-                hasGivenItem = true;
+                if (hasGivenItem == false)
+                {
+                    GiveItem();
+                    hasGivenItem = true;
+                }
+
+                //interactableObject.StopInteract();
             }
-            
-            //interactableObject.StopInteract();
         }
+    }
+
+    public void GiveItem()
+    {
+        InventorySystem.instance.Add(referenceItem);
+        Debug.Log("Kamu dapat: " + referenceItem.name);
+        NotificationUI.instance.AddObtainedItemSlot(referenceItem);
     }
 }

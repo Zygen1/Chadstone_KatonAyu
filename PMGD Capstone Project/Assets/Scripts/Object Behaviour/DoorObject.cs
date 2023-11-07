@@ -38,6 +38,7 @@ public class DoorObject : MonoBehaviour
 
     [Header("Unlock Anim")]
     public bool isUnlockAnim;
+    public bool isUnlockDoor;
     public GameObject lockObj;
     public float disableObjTime;
     public Animator unlockAnim;
@@ -183,7 +184,10 @@ public class DoorObject : MonoBehaviour
 
         // Setelah alpha mencapai 0, nonaktifkan objek
         lockObj.SetActive(false);
-        isUnlocked = true;
+        if (isUnlockDoor)
+        {
+            isUnlocked = true;
+        }
     }
 
     void HandlePuzzleUnlock()
@@ -275,6 +279,7 @@ public class DoorObject : MonoBehaviour
 
         if (switchUnlock == switchList.Length)
         {
+            Debug.Log("KEBUKA");
             if (isUnlockAnim)
             {
                 StartCoroutine(UnlockAnimAction());
