@@ -47,10 +47,10 @@ public class PuzzleObject : MonoBehaviour
                     }
                     else
                     {
+                        NotificationUI.instance.ShowNotification(itemName);
                         //NOTIFIKASI ///////////////////////////////////////////////////////
                         Debug.Log("Need : " + itemName + " item");
                         //END NOTIFIKASI ///////////////////////////////////////////////////
-
                         interactableObject.isInteracted = false;
                         PlayerStats.instance.isPlayerInteract = false;
                     }
