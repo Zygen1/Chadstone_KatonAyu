@@ -58,7 +58,11 @@ public class ItemSlot : MonoBehaviour
             if (!inventoryItem.data.isAnEquipment)
             {
                 inventoryItem.data.itemEvent?.Invoke();
-                InventorySystem.instance.Remove(inventoryItem.data.referenceData);
+
+                if (!inventoryItem.data.dontDestroyWhenUse)
+                {
+                    InventorySystem.instance.Remove(inventoryItem.data.referenceData);
+                }
             }
             else if (inventoryItem.data.isAnEquipment)
             {

@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using System;
 
 [CustomEditor(typeof(ObjectNeedItem))]
 public class ObjectNeedItemEditor : Editor
@@ -14,7 +15,17 @@ public class ObjectNeedItemEditor : Editor
 
         EditorGUILayout.LabelField("Custom Settings", EditorStyles.boldLabel);
 
-        objectNeedItem.itemName = EditorGUILayout.TextField("Item Name", objectNeedItem.itemName);
+        int itemArraySize = EditorGUILayout.IntField("Item Name Array Size", objectNeedItem.itemName.Length);
+        if (itemArraySize != objectNeedItem.itemName.Length)
+        {
+            Array.Resize(ref objectNeedItem.itemName, itemArraySize);
+        }
+
+        for (int i = 0; i < objectNeedItem.itemName.Length; i++)
+        {
+            objectNeedItem.itemName[i] = EditorGUILayout.TextField("Item Name " + i, objectNeedItem.itemName[i]);
+        }
+
         objectNeedItem.destroyItem = EditorGUILayout.Toggle("Destroy Item", objectNeedItem.destroyItem);
         objectNeedItem.isASwitchObj = EditorGUILayout.Toggle("Is a Switch Object", objectNeedItem.isASwitchObj);
 

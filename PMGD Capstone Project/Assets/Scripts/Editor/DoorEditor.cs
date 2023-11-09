@@ -87,5 +87,24 @@ public class DoorObjectEditor : Editor
         {
             door.teleportPos = (GameObject)EditorGUILayout.ObjectField("Teleport Position", door.teleportPos, typeof(GameObject), true);
         }
+
+        door.isUnlockAnim = EditorGUILayout.Toggle("Unlock Animation", door.isUnlockAnim);
+        if (door.isUnlockAnim)
+        {
+            door.unlockAnim = (Animator)EditorGUILayout.ObjectField("Unlock Animator", door.unlockAnim, typeof(Animator), true);
+            door.unlockerSprite = (Sprite)EditorGUILayout.ObjectField("Unlocker Sprite", door.unlockerSprite, typeof(Sprite), true);
+            door.unlockerRenderer = (SpriteRenderer)EditorGUILayout.ObjectField("Unlocker Renderer", door.unlockerRenderer, typeof(SpriteRenderer), true);
+            door.disableObjTime = EditorGUILayout.FloatField("Disable Object Time", door.disableObjTime);
+            door.isUnlockDoor = EditorGUILayout.Toggle("Unlock Door", door.isUnlockDoor);
+            door.isStopInteract = EditorGUILayout.Toggle("Stop Interact", door.isStopInteract);
+            door.lockObj = (GameObject)EditorGUILayout.ObjectField("Lock Object", door.lockObj, typeof(GameObject), true);
+        }
+
+        door.showDialogOnLock = EditorGUILayout.Toggle("Show Dialog On Lock", door.showDialogOnLock);
+
+        if (door.showDialogOnLock)
+        {
+            door.dialogueTrigger = (DialogueTrigger)EditorGUILayout.ObjectField("Dialogue Trigger", door.dialogueTrigger, typeof(DialogueTrigger), true);
+        }
     }
 }

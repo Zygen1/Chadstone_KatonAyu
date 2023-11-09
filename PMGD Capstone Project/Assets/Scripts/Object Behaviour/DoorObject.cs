@@ -36,13 +36,22 @@ public class DoorObject : MonoBehaviour
     GameObject player;
     [HideInInspector] public GameObject teleportPos;
 
-    [Header("Option")]
-    [Tooltip("Set Inactive Object when unlocked")] public bool disableOnUnlock;
-    public GameObject objToSetInactive;
+    [Header("Unlock Anim")]
+    [HideInInspector] public bool isUnlockAnim;
+    [HideInInspector] public bool isUnlockDoor;
+    [HideInInspector] public bool isStopInteract;
+    [HideInInspector] public GameObject lockObj;
+    [HideInInspector] public float disableObjTime;
+    [HideInInspector] public Animator unlockAnim;
+    [HideInInspector] public Sprite unlockerSprite;
+    [HideInInspector] public SpriteRenderer unlockerRenderer;
+
+    [Header("Show Dialogue")]
+    [HideInInspector] public bool showDialogOnLock;
+    [HideInInspector] public DialogueTrigger dialogueTrigger;
 
     [Header("Debug")]
-    [SerializeField] bool unlocked;
-
+    [SerializeField] bool isUnlocked;
     InteractableObject interactableObject;
     bool interactIsDone;
     bool isOpen;
@@ -67,7 +76,7 @@ public class DoorObject : MonoBehaviour
 
         if (lockType == LockType.NONE)
         {
-            unlocked = true;
+            isUnlocked = true;
         }
     }
 
@@ -81,24 +90,29 @@ public class DoorObject : MonoBehaviour
             {
                 HandleItemUnlock();
             }
-            //Lock type puzzle
-            if (lockType == LockType.PUZZLE)
-            {
-                HandlePuzzleUnlock();
-            }
-            //Lock type switch
-            if (lockType == LockType.SWITCH)
-            {
-                HandleSwitchUnlock();
-            }
-
             PerformAction();
+        }
+
+        //Lock type puzzle
+        if (lockType == LockType.PUZZLE)
+        {
+            HandlePuzzleUnlock();
+        }
+        //Lock type switch
+        if (lockType == LockType.SWITCH)
+        {
+            HandleSwitchUnlock();
+        }
+
+        if (isUnlocked && showDialogOnLock)
+        {
+            dialogueTrigger.enabled = false;
         }
     }
 
     void PerformAction()
     {
-        if (unlocked)
+        if (isUnlocked)
         {
             if (action == DoorAction.CHANGE_SCENE)
             {
@@ -114,7 +128,11 @@ public class DoorObject : MonoBehaviour
             {
                 TeleportAction();
             }
+        }
 
+        if (showDialogOnLock == false)
+        {
+            interactableObject.StopInteract();
         }
     }
 
@@ -133,26 +151,28 @@ public class DoorObject : MonoBehaviour
     void AnimationAction()
     {
         isOpen = !isOpen;
-        if (isOpen)
-        {
-            animator.SetBool("Open", true);
-        }
-        else
-        {
-            animator.SetBool("Open", false);
-        }
+        animator.SetBool("Open", isOpen);
 
         interactableObject.StopInteract();
     }
 
-    IEnumerator DisableObjectAction()
+    IEnumerator UnlockAnimAction()
     {
-        interactableObject.StopInteract();
+        if (isUnlocked == false)
+        {
+            unlockerRenderer.sprite = unlockerSprite;
+            unlockAnim.SetTrigger("Unlock");
+        }
 
-        SpriteRenderer spriteRenderer = objToSetInactive.GetComponent<SpriteRenderer>();
+        if (isStopInteract)
+        {
+            interactableObject.StopInteract();
+        }
+
+        SpriteRenderer spriteRenderer = lockObj.GetComponent<SpriteRenderer>();
 
         float alpha = 1f;
-        float alphaReductionRate = 0.5f;
+        float alphaReductionRate = 1f / disableObjTime; // Menghitung berapa lama per detik untuk mereduksi alpha
 
         // Loop sampai alpha mencapai 0
         while (alpha > 0)
@@ -165,8 +185,15 @@ public class DoorObject : MonoBehaviour
         }
 
         // Setelah alpha mencapai 0, nonaktifkan objek
-        objToSetInactive.SetActive(false);
-        unlocked = true;
+        lockObj.SetActive(false);
+        if (isUnlockDoor)
+        {
+            isUnlocked = true;
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
 
     void HandlePuzzleUnlock()
@@ -177,13 +204,13 @@ public class DoorObject : MonoBehaviour
             if (puzzleStats.puzzleName == puzzleName && puzzleStats.isDone)
             {
 
-                if (disableOnUnlock)
+                if (isUnlockAnim)
                 {
-                    StartCoroutine(DisableObjectAction());
+                    StartCoroutine(UnlockAnimAction());
                 }
                 else
                 {
-                    unlocked = true;
+                    isUnlocked = true;
                 }
             }
             else if (puzzleStats.puzzleName == puzzleName && !puzzleStats.isDone)
@@ -192,7 +219,13 @@ public class DoorObject : MonoBehaviour
                 Debug.Log("Locked");
                 //END NOTIFIKASI ///////////////////////////////////////////////////
 
-                interactableObject.StopInteract();
+                animator.SetBool("Open", false);
+                isUnlocked = false;
+
+                if (showDialogOnLock)
+                {
+                    dialogueTrigger.enabled = true;
+                }
             }
         }
     }
@@ -215,13 +248,13 @@ public class DoorObject : MonoBehaviour
 
         if (itemUnlock == itemName.Length)
         {
-            if (disableOnUnlock)
+            if (isUnlockAnim)
             {
-                StartCoroutine(DisableObjectAction());
+                StartCoroutine(UnlockAnimAction());
             }
             else
             {
-                unlocked = true;
+                isUnlocked = true;
             }
         }
         else
@@ -229,9 +262,6 @@ public class DoorObject : MonoBehaviour
             //NOTIFIKASI ///////////////////////////////////////////////////////
             Debug.Log("Locked");
             //END NOTIFIKASI ///////////////////////////////////////////////////
-
-
-            interactableObject.StopInteract();
         }
     }
 
@@ -250,21 +280,26 @@ public class DoorObject : MonoBehaviour
                 //END NOTIFIKASI ///////////////////////////////////////////////////
 
                 switchUnlock = 0;
-                unlocked = false;
-                interactableObject.StopInteract();
+                isUnlocked = false;
+                animator.SetBool("Open", false);
+                if (showDialogOnLock)
+                {
+                    dialogueTrigger.enabled = true;
+                }
                 return;
             }
         }
 
         if (switchUnlock == switchList.Length)
         {
-            if (disableOnUnlock)
+            if (isUnlockAnim)
             {
-                StartCoroutine(DisableObjectAction());
+                Debug.Log("unlock anim");
+                StartCoroutine(UnlockAnimAction());
             }
             else
             {
-                unlocked = true;
+                isUnlocked = true;
             }
         }
     }

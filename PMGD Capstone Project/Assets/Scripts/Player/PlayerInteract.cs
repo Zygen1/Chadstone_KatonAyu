@@ -9,8 +9,6 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] GameObject[] interactableObjects;
     [SerializeField] GameObject currentInteractableOBJ;
 
-
-    //public bool playerIsInteracting;
     [SerializeField] bool interactInput;
 
 
@@ -22,14 +20,10 @@ public class PlayerInteract : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        //Get all objects with tag
         interactableObjects = GameObject.FindGameObjectsWithTag("InteractableObject");
 
         bool canInteract = false;
 
-        //check obj inside "interactAbleObjects" if is not null then check the distance of that obj.
-        //If distance below "interactRange" set "canInteract = true" and put that obj to "currentInteractableOBJ"
-        //And break the loop
         foreach (GameObject interactable_object in interactableObjects)
         {
             if (interactable_object != null)
@@ -62,8 +56,6 @@ public class PlayerInteract : MonoBehaviour
             {
                 interactInput = false;
             }
-
-            //Debug.Log("INT VAL: " + interact_btn_value);
         }
     }
 
@@ -78,7 +70,6 @@ public class PlayerInteract : MonoBehaviour
             {
                 InteractableObject interactable_object = currentInteractableOBJ.GetComponent<InteractableObject>();
                 interactable_object.isInteracted = true;
-                //interactable_object.isInteracted = !interactable_object.isInteracted;
             }
             else
             {

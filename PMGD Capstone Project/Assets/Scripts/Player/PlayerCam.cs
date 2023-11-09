@@ -5,22 +5,30 @@ using UnityEngine;
 public class PlayerCam : MonoBehaviour
 {
     [SerializeField] Transform player;
-    [SerializeField] float smoothSpeed = 5.0f; // Kecepatan perpindahan kamera
+    [SerializeField] float smoothSpeed = 5.0f;
 
-    private Vector3 offset; // Jarak awal antara kamera dan pemain
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        offset = transform.position - player.position; // Menghitung jarak awal
-    }
+    [SerializeField] private Vector3 offset;
+    [SerializeField] private bool offsetIsSet;
 
     // Update is called once per frame
     void LateUpdate()
     {
-        Vector3 targetPosition = player.position + offset;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 
-        // Lerp digunakan untuk mengubah posisi kamera secara mulus
-        transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * Time.fixedDeltaTime);
+        if(player != null)
+        {
+            if(offsetIsSet == false)
+            {
+                offset = transform.position - player.position;
+                offsetIsSet = true;
+            }
+
+            Vector3 targetPosition = player.position + offset;
+            transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * Time.fixedDeltaTime);
+        }
+        else
+        {
+            offsetIsSet = false;
+        }
     }
 }
