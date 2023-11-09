@@ -2,11 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
+    [Header("Scene")]
+    [SerializeField] string gameplayScene;
+
     [Header("Instruksi Panel")]
     [SerializeField] GameObject howToPlayPanel;
+    [SerializeField] GameObject instruksiKey1OffBtn;
+    [SerializeField] GameObject instruksiKey1OnBtn;
+    [SerializeField] GameObject instruksiKey2OffBtn;
+    [SerializeField] GameObject instruksiKey2OnBtn;
     [SerializeField] GameObject instruksiKey1;
     [SerializeField] GameObject instruksiKey2;
 
@@ -33,19 +41,46 @@ public class MainMenuManager : MonoBehaviour
     public void NewGame()
     {
         Debug.Log("Clicked");
-        SceneManager.LoadScene("Prototype");
+        SceneManager.LoadScene(gameplayScene);
         SoundManager.instance.UIClickSfx();
     }
 
     public void ResumeGame()
     {
-        SceneManager.LoadScene("Prototype");
+        SceneManager.LoadScene(gameplayScene);
         SoundManager.instance.UIClickSfx();
     }
 
     public void Manual()
     {
         howToPlayPanel.SetActive(true);
+        if (PlayerPrefs.HasKey("ActiveController"))
+        {
+            if (PlayerPrefs.GetFloat("ActiveController") == 1)
+            {
+                instruksiKey1.SetActive(true);
+                instruksiKey2.SetActive(false);
+                instruksiKey1OnBtn.SetActive(true);
+                instruksiKey1OffBtn.SetActive(false);
+                instruksiKey2OffBtn.SetActive(true);
+                instruksiKey2OnBtn.SetActive(false);
+                instruksiKey1OnBtn.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                instruksiKey1.SetActive(false);
+                instruksiKey2.SetActive(true);
+                instruksiKey1OnBtn.SetActive(false);
+                instruksiKey1OffBtn.SetActive(true);
+                instruksiKey2OffBtn.SetActive(false);
+                instruksiKey2OnBtn.SetActive(true);
+                instruksiKey2OnBtn.GetComponent<Button>().interactable = false;
+            }
+        }
+        else
+        {
+            ChangeKeyButton(1);
+        }
         SoundManager.instance.UIClickSfx();
     }
 
@@ -73,13 +108,25 @@ public class MainMenuManager : MonoBehaviour
         {
             instruksiKey1.SetActive(true);
             instruksiKey2.SetActive(false);
+            instruksiKey1OnBtn.SetActive(true);
+            instruksiKey1OffBtn.SetActive(false);
+            instruksiKey2OffBtn.SetActive(true);
+            instruksiKey2OnBtn.SetActive(false);
+            instruksiKey1OnBtn.GetComponent<Button>().interactable = false;
+            PlayerPrefs.SetFloat("ActiveController", key);
             SoundManager.instance.UIClickSfx();
         }
         else
         {
             instruksiKey1.SetActive(false);
             instruksiKey2.SetActive(true);
+            instruksiKey1OnBtn.SetActive(false);
+            instruksiKey1OffBtn.SetActive(true);
+            instruksiKey2OffBtn.SetActive(false);
+            instruksiKey2OnBtn.SetActive(true);
+            instruksiKey2OnBtn.GetComponent<Button>().interactable = false;
             SoundManager.instance.UIClickSfx();
+            PlayerPrefs.SetFloat("ActiveController", key);
         }
     }
 
