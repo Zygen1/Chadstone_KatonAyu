@@ -37,20 +37,21 @@ public class DoorObject : MonoBehaviour
     [HideInInspector] public GameObject teleportPos;
 
     [Header("Unlock Anim")]
-    public bool isUnlockAnim;
-    public bool isUnlockDoor;
-    public GameObject lockObj;
-    public float disableObjTime;
-    public Animator unlockAnim;
-    public Sprite unlockerSprite;
-    public SpriteRenderer unlockerRenderer;
+    [HideInInspector] public bool isUnlockAnim;
+    [HideInInspector] public bool isUnlockDoor;
+    [HideInInspector] public bool isStopInteract;
+    [HideInInspector] public GameObject lockObj;
+    [HideInInspector] public float disableObjTime;
+    [HideInInspector] public Animator unlockAnim;
+    [HideInInspector] public Sprite unlockerSprite;
+    [HideInInspector] public SpriteRenderer unlockerRenderer;
 
-    [Header("Option")]
-    public bool showDialogOnLock;
-    
+    [Header("Show Dialogue")]
+    [HideInInspector] public bool showDialogOnLock;
+    [HideInInspector] public DialogueTrigger dialogueTrigger;
+
     [Header("Debug")]
     [SerializeField] bool isUnlocked;
-
     InteractableObject interactableObject;
     bool interactIsDone;
     bool isOpen;
@@ -89,18 +90,23 @@ public class DoorObject : MonoBehaviour
             {
                 HandleItemUnlock();
             }
-            //Lock type puzzle
-            if (lockType == LockType.PUZZLE)
-            {
-                HandlePuzzleUnlock();
-            }
-            //Lock type switch
-            if (lockType == LockType.SWITCH)
-            {
-                HandleSwitchUnlock();
-            }
-
             PerformAction();
+        }
+
+        //Lock type puzzle
+        if (lockType == LockType.PUZZLE)
+        {
+            HandlePuzzleUnlock();
+        }
+        //Lock type switch
+        if (lockType == LockType.SWITCH)
+        {
+            HandleSwitchUnlock();
+        }
+
+        if (isUnlocked && showDialogOnLock)
+        {
+            dialogueTrigger.enabled = false;
         }
     }
 
@@ -124,7 +130,7 @@ public class DoorObject : MonoBehaviour
             }
         }
 
-        if(showDialogOnLock == false)
+        if (showDialogOnLock == false)
         {
             interactableObject.StopInteract();
         }
@@ -145,27 +151,23 @@ public class DoorObject : MonoBehaviour
     void AnimationAction()
     {
         isOpen = !isOpen;
-        if (isOpen)
-        {
-            animator.SetBool("Open", true);
-        }
-        else
-        {
-            animator.SetBool("Open", false);
-        }
+        animator.SetBool("Open", isOpen);
 
         interactableObject.StopInteract();
     }
 
     IEnumerator UnlockAnimAction()
     {
-        if(isUnlocked == false)
+        if (isUnlocked == false)
         {
             unlockerRenderer.sprite = unlockerSprite;
             unlockAnim.SetTrigger("Unlock");
         }
 
-        interactableObject.StopInteract();
+        if (isStopInteract)
+        {
+            interactableObject.StopInteract();
+        }
 
         SpriteRenderer spriteRenderer = lockObj.GetComponent<SpriteRenderer>();
 
@@ -187,6 +189,10 @@ public class DoorObject : MonoBehaviour
         if (isUnlockDoor)
         {
             isUnlocked = true;
+        }
+        else
+        {
+            Destroy(this);
         }
     }
 
@@ -213,7 +219,13 @@ public class DoorObject : MonoBehaviour
                 Debug.Log("Locked");
                 //END NOTIFIKASI ///////////////////////////////////////////////////
 
-                //interactableObject.StopInteract();
+                animator.SetBool("Open", false);
+                isUnlocked = false;
+
+                if (showDialogOnLock)
+                {
+                    dialogueTrigger.enabled = true;
+                }
             }
         }
     }
@@ -250,9 +262,6 @@ public class DoorObject : MonoBehaviour
             //NOTIFIKASI ///////////////////////////////////////////////////////
             Debug.Log("Locked");
             //END NOTIFIKASI ///////////////////////////////////////////////////
-
-
-            //interactableObject.StopInteract();
         }
     }
 
@@ -272,16 +281,20 @@ public class DoorObject : MonoBehaviour
 
                 switchUnlock = 0;
                 isUnlocked = false;
-                //interactableObject.StopInteract();
+                animator.SetBool("Open", false);
+                if (showDialogOnLock)
+                {
+                    dialogueTrigger.enabled = true;
+                }
                 return;
             }
         }
 
         if (switchUnlock == switchList.Length)
         {
-            Debug.Log("KEBUKA");
             if (isUnlockAnim)
             {
+                Debug.Log("unlock anim");
                 StartCoroutine(UnlockAnimAction());
             }
             else
