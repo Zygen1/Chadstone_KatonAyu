@@ -59,7 +59,6 @@ public class ObjectNeedItem : MonoBehaviour
                 //NOTIFIKASI ///////////////////////////////////////////////////////
                 Debug.Log("Need : " + itemName + " item");
                 //END NOTIFIKASI ///////////////////////////////////////////////////
-                //NotificationUI.instance.ShowNotification(itemName);
             }
             interactableObject.StopInteract();
         }
