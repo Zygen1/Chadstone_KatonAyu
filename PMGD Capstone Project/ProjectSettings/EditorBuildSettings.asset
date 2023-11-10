@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
     path: Assets/Scenes/Main Scene/MainMenu.unity
     guid: 79fa5a55315ee024a8534e210c312c8a
   - enabled: 1
-    path: Assets/Scenes/Prototype.unity
-    guid: b759171f61b154a49b7f40e997d5a6fc
+    path: Assets/Scenes/Main Scene/Gameplay_LuarRumah.unity
+    guid: 83f62abaf0d561745a64cc309cf1dd18
+  - enabled: 1
+    path: Assets/Scenes/Main Scene/Gameplay_DalamRumah.unity
+    guid: fd62f11c045961342a3418604e1a095e
   m_configObjects: {}

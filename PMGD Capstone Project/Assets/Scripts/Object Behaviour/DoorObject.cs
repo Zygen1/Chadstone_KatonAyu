@@ -35,6 +35,7 @@ public class DoorObject : MonoBehaviour
     [Header("Teleport")]
     GameObject player;
     [HideInInspector] public GameObject teleportPos;
+    [HideInInspector] public GameObject effectObj;
 
     [Header("Unlock Anim")]
     [HideInInspector] public bool isUnlockAnim;
@@ -138,6 +139,10 @@ public class DoorObject : MonoBehaviour
 
     void TeleportAction()
     {
+        if(effectObj != null)
+        {
+            effectObj.SetActive(true);
+        }
         player.transform.position = teleportPos.transform.position;
         interactableObject.StopInteract();
     }

@@ -16,7 +16,7 @@ public class DialogueManager : MonoBehaviour
     public Animator animator;
 
     [Header("UI")]
-    [SerializeField] GameObject[] inactiveUIObjects;
+    [SerializeField] GameObject[] activateUIObjects;
     /*[SerializeField] GameObject UIControl;
     [SerializeField] GameObject UIStats;*/
 
@@ -61,9 +61,9 @@ public class DialogueManager : MonoBehaviour
         PlayerStats.instance.isPlayerDialogue = true;
         /*UIControl.SetActive(false);
         UIStats.SetActive(false);*/
-        for(int i = 0; i < inactiveUIObjects.Length; i++)
+        for(int i = 0; i < activateUIObjects.Length; i++)
         {
-            inactiveUIObjects[i].SetActive(false);
+            activateUIObjects[i].SetActive(false);
         }
 
         animator.SetBool("IsOpen", true);
@@ -89,9 +89,9 @@ public class DialogueManager : MonoBehaviour
         PlayerStats.instance.isPlayerDialogue = true;
         /*UIControl.SetActive(false);
         UIStats.SetActive(false);*/
-        for (int i = 0; i < inactiveUIObjects.Length; i++)
+        for (int i = 0; i < activateUIObjects.Length; i++)
         {
-            inactiveUIObjects[i].SetActive(false);
+            activateUIObjects[i].SetActive(false);
         }
         currentCutsceneAnimator = cutsceneAnimator;
         currentCutsceneManager = cutsceneManager;
@@ -200,9 +200,9 @@ public class DialogueManager : MonoBehaviour
         PlayerStats.instance.isPlayerInteract = false;
         /*UIControl.SetActive(true);
         UIStats.SetActive(true);*/
-        for (int i = 0; i < inactiveUIObjects.Length; i++)
+        for (int i = 0; i < activateUIObjects.Length; i++)
         {
-            inactiveUIObjects[i].SetActive(true);
+            activateUIObjects[i].SetActive(true);
         }
     }
 }

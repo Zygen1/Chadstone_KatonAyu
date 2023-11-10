@@ -86,6 +86,7 @@ public class DoorObjectEditor : Editor
         else if (door.action == DoorAction.TELEPORT)
         {
             door.teleportPos = (GameObject)EditorGUILayout.ObjectField("Teleport Position", door.teleportPos, typeof(GameObject), true);
+            door.effectObj = (GameObject)EditorGUILayout.ObjectField("Effect Object", door.effectObj, typeof(GameObject), true);
         }
 
         door.isUnlockAnim = EditorGUILayout.Toggle("Unlock Animation", door.isUnlockAnim);

@@ -38,10 +38,10 @@ public class MainMenuManager : MonoBehaviour
         
     }
 
-    public void NewGame()
+    public void ChangeScene(string scene_name)
     {
         Debug.Log("Clicked");
-        SceneManager.LoadScene(gameplayScene);
+        loadingScreen.instance.LoadScene(scene_name);
         SoundManager.instance.UIClickSfx();
     }
 
