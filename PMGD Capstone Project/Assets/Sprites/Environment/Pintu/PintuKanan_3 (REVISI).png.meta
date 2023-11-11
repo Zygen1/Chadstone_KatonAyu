@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e7a4fee029e671247a15248b6ea7ecfc
+guid: 2d564dfe55b28464787bf7e2a521f94c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,22 +136,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PintuKanan_2_0
+      name: PintuKanan_3 (REVISI)_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 299
+        y: 539
         width: 720
-        height: 1230
+        height: 988
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 531dc6ed882e7f649b0e9604f8c93334
-      internalID: -1007446749
+      spriteID: 317357a8b70b7fa419e513e1ab298161
+      internalID: 205769363
       vertices: []
       indices: 
       edges: []
@@ -167,7 +167,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PintuKanan_2_0: -1007446749
+      PintuKanan_3 (REVISI)_0: 205769363
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
