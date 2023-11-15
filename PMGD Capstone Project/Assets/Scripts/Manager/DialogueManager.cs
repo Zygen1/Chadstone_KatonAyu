@@ -14,11 +14,7 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogue;
     public Animator animator;
-
-    [Header("UI")]
-    [SerializeField] GameObject[] activateUIObjects;
-    /*[SerializeField] GameObject UIControl;
-    [SerializeField] GameObject UIStats;*/
+    public float typingSpeed = 0.05f;
 
     [SerializeField] private Queue<string> sentences;
     Dialogue currentDialogue;
@@ -59,12 +55,6 @@ public class DialogueManager : MonoBehaviour
         currentDialogue = dialogue;
         currentDialogueTrigger = dialogueTrigger;
         PlayerStats.instance.isPlayerDialogue = true;
-        /*UIControl.SetActive(false);
-        UIStats.SetActive(false);*/
-        for(int i = 0; i < activateUIObjects.Length; i++)
-        {
-            activateUIObjects[i].SetActive(false);
-        }
 
         animator.SetBool("IsOpen", true);
 
@@ -87,12 +77,6 @@ public class DialogueManager : MonoBehaviour
         currentDialogue = dialogue;
         currentDialogueTrigger = dialogueTrigger;
         PlayerStats.instance.isPlayerDialogue = true;
-        /*UIControl.SetActive(false);
-        UIStats.SetActive(false);*/
-        for (int i = 0; i < activateUIObjects.Length; i++)
-        {
-            activateUIObjects[i].SetActive(false);
-        }
         currentCutsceneAnimator = cutsceneAnimator;
         currentCutsceneManager = cutsceneManager;
 
@@ -136,7 +120,7 @@ public class DialogueManager : MonoBehaviour
         foreach(char letter in sentence.ToCharArray())
         {
             dialogue.text += letter;
-            yield return null;
+            yield return new WaitForSeconds(typingSpeed);
         }
     }
 
@@ -191,18 +175,19 @@ public class DialogueManager : MonoBehaviour
 
         if (isDialogueCutscene)
         {
-            currentCutsceneManager.AfterCutscene();
+            if (currentCutsceneManager.onDialogueEndRunAfcut)
+            {
+                currentCutsceneManager.AfterCutscene();
+            }
+            else
+            {
+                currentCutsceneAnimator.SetBool("NextState", true);
+            }
         }
 
         //Setup
         animator.SetBool("IsOpen", false);
         PlayerStats.instance.isPlayerDialogue = false;
         PlayerStats.instance.isPlayerInteract = false;
-        /*UIControl.SetActive(true);
-        UIStats.SetActive(true);*/
-        for (int i = 0; i < activateUIObjects.Length; i++)
-        {
-            activateUIObjects[i].SetActive(true);
-        }
     }
 }

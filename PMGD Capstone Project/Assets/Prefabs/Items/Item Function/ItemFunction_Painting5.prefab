@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd2e1f4a9e702c94098e6b81716c5bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableObjName: Painting5
+  interactableObjName: Inventory_KertasPamflet

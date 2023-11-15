@@ -23,11 +23,11 @@ public class ObjectNeedItem : MonoBehaviour
     [HideInInspector] public GameObject objToActivate;
 
     [Header("Give Item")]
-    public bool isGiveItem;
-    public ObjectGiveItem objGiveItem;
+    [HideInInspector] public bool isGiveItem;
+    [HideInInspector] public ObjectGiveItem objGiveItem;
 
     [Header("Requirement")]
-    [HideInInspector] private InteractableObject interactableObject;
+    private InteractableObject interactableObject;
 
     [Header("Status")]
     private bool isDone;

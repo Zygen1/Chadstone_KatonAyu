@@ -18,5 +18,7 @@ public class BasicAnimationEvent : MonoBehaviour
         {
             SceneManager.LoadScene(sceneName);
         }
+
+        Debug.Log("BASIC ANIM EVENT: Change Scene");
     }
 }
