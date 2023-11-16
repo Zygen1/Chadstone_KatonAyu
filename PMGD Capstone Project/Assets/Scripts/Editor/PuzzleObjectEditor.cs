@@ -21,17 +21,21 @@ public class PuzzleObjectEditor : Editor
         if (puzzleObject.isPuzzleNeedItem)
         {
             puzzleObject.itemName = EditorGUILayout.TextField("Item Name", puzzleObject.itemName);
-            puzzleObject.destroyItem = EditorGUILayout.Toggle("Destroy Item", puzzleObject.destroyItem);
 
+            puzzleObject.destroyItem = EditorGUILayout.Toggle("Destroy Item", puzzleObject.destroyItem);
             if (puzzleObject.destroyItem)
             {
-                puzzleObject.destroyItemInventory = (DestroyItemInventory)EditorGUILayout.ObjectField(
-                    "Destroy Item Inventory", puzzleObject.destroyItemInventory, typeof(DestroyItemInventory), true);
+                puzzleObject.destroyItemInventory = (DestroyItemInventory)EditorGUILayout.ObjectField("Destroy Item Inventory", puzzleObject.destroyItemInventory, typeof(DestroyItemInventory), true);
+            }
+
+            puzzleObject.isShowingDialogue = EditorGUILayout.Toggle("Show Dialogue", puzzleObject.isShowingDialogue);
+            if (puzzleObject.isShowingDialogue)
+            {
+                puzzleObject.dialogueTrigger = (DialogueTrigger)EditorGUILayout.ObjectField("Dialogue Trigger", puzzleObject.dialogueTrigger, typeof(DialogueTrigger), true);
             }
         }
 
         puzzleObject.isChangeObjToInteractable = EditorGUILayout.Toggle("Change Object To Interactable", puzzleObject.isChangeObjToInteractable);
-
         if (puzzleObject.isChangeObjToInteractable)
         {
             puzzleObject.objToChange = (GameObject)EditorGUILayout.ObjectField(
@@ -39,7 +43,6 @@ public class PuzzleObjectEditor : Editor
         }
 
         puzzleObject.isDeactiveWhenDone = EditorGUILayout.Toggle("Deactivate When Done", puzzleObject.isDeactiveWhenDone);
-
         puzzleObject.realPuzzle = (GameObject)EditorGUILayout.ObjectField("Real Puzzle", puzzleObject.realPuzzle, typeof(GameObject), true);
         puzzleObject.puzzleStats = (PuzzleStats)EditorGUILayout.ObjectField("Puzzle Stats", puzzleObject.puzzleStats, typeof(PuzzleStats), true);
     }
