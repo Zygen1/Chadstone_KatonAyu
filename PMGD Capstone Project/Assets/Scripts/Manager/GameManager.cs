@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject pausePanel;
     [SerializeField] Slider BGMSlider;
+    [SerializeField] Slider SFXSlider;
 
     private void Awake()
     {
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
         pausePanel.SetActive(true);
         Time.timeScale = 0.0f;
         BGMSlider.value = PlayerPrefs.GetFloat("BGMVolume");
+        SFXSlider.value = PlayerPrefs.GetFloat("SFXVolume");
         SoundManager.instance.UIClickSfx();
     }
 
@@ -59,6 +61,12 @@ public class GameManager : MonoBehaviour
     public void ChangeBGMVolume()
     {
         float volume = BGMSlider.value;
-        SoundManager.instance.ChangeBGMVolumeFromGameManager(volume);
+        SoundManager.instance.ChangeBGMVolumeFromAnotherScript(volume);
+    }
+
+    public void ChangeSFXVolume()
+    {
+        float volume = SFXSlider.value;
+        SoundManager.instance.ChangeSFXVolumeFromAnotherScript(volume);
     }
 }

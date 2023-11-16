@@ -3283,7 +3283,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f9c05d1f01dad749be63b1b14a1239a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameplayScene: Prototype
   howToPlayPanel: {fileID: 1059578607}
   instruksiKey1OffBtn: {fileID: 1719503954}
   instruksiKey1OnBtn: {fileID: 1217043703}
@@ -3298,6 +3297,8 @@ MonoBehaviour:
   - {fileID: 70739654}
   - {fileID: 1361191974}
   - {fileID: 1728709267}
+  BGMSlider: {fileID: 616577997}
+  SFXSlider: {fileID: 1806977117}
 --- !u!4 &273635374
 Transform:
   m_ObjectHideFlags: 0
@@ -6001,6 +6002,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1507552480}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: ChangeBGMVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 273635373}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
         m_MethodName: ChangeBGMVolume
         m_Mode: 1
         m_Arguments:
@@ -14677,6 +14690,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1507552480}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: ChangeSFXVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 273635373}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
         m_MethodName: ChangeSFXVolume
         m_Mode: 1
         m_Arguments:

@@ -84,9 +84,15 @@ public class SoundManager : MonoBehaviour
         SFX.PlayOneShot(uiButton);
     }
 
-    public void ChangeBGMVolumeFromGameManager(float volume)
+    public void ChangeBGMVolumeFromAnotherScript(float volume)
     {
         audioMixer.SetFloat("BGM", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("BGMVolume", volume);
+    }
+
+    public void ChangeSFXVolumeFromAnotherScript(float volume)
+    {
+        audioMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat("SFXVolume", volume);
     }
 }
