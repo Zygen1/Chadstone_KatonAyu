@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ItemFunction_ShowItem : MonoBehaviour
 {
-    public string interactableObjName;
+    //public string interactableObjName;
 
-    public void ShowPainting5()
+    public void ShowItem(string objName)
     {
         UIManager.Instance.ToggleInventoryPanel();
-        InteractableObject interactableObject = GameObject.Find(interactableObjName).GetComponent<InteractableObject>();
+        InteractableObject interactableObject = GameObject.Find(objName).GetComponent<InteractableObject>();
         PlayerStats.instance.isPlayerInteract = true;
         interactableObject.isInteracted = true;
     }
