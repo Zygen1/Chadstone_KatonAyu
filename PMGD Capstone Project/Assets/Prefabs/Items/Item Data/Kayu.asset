@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc5ebe14b4e7d454bb4835ff72d96e4c, type: 3}
+  m_Name: Kayu
+  m_EditorClassIdentifier: 
+  id: InventoryItem_Kertas
+  displayName: Kayu
+  icon: {fileID: 21300000, guid: 6031b976bc222ae41affc4c2dd07d0f1, type: 3}
+  prefab: {fileID: 3312092920087522164, guid: 1777256a4fc6b754fb1e0fc43c4dfad0, type: 3}
+  referenceData: {fileID: 11400000}
+  isUseEvent: 0
+  itemEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  dontDestroyWhenUse: 0
+  isAnEquipment: 0
+  equipmentName: 

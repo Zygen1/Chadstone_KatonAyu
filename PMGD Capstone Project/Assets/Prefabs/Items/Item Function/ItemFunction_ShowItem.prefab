@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1965413244988437260}
   - component: {fileID: 3562357058353054298}
   m_Layer: 0
-  m_Name: ItemFunction_Painting5
+  m_Name: ItemFunction_ShowItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
