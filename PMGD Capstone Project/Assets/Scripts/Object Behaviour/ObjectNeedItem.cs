@@ -15,16 +15,26 @@ public class ObjectNeedItem : MonoBehaviour
     [Header("Change Dialogue")]
     [HideInInspector] public bool isChangeDialogue;
     [HideInInspector] public bool isParentDialogue;
-    [HideInInspector] public DialogueTrigger dialogueTrigger;
+    [HideInInspector] public DialogueTrigger otherDialogueTrig;
     [HideInInspector] public bool forceStart;
 
     [Header("Activate Obj")]
     [HideInInspector] public bool isActivateObj;
     [HideInInspector] public GameObject objToActivate;
+    [Header("TEMP Header (isActivateObj?)")]
+    public GameObject[] otherObjToActivate;
+    public GameObject[] otherObjToDeactivate;
 
     [Header("Give Item")]
     [HideInInspector] public bool isGiveItem;
     [HideInInspector] public ObjectGiveItem objGiveItem;
+
+    [Header("Show Dialogue")]
+    public bool isShowingDialogue;
+    public DialogueTrigger dialogueTrigger;
+
+    [Header("Change to Untagged")]
+    public bool isChangeToUntagged;
 
     [Header("Requirement")]
     private InteractableObject interactableObject;
@@ -40,7 +50,7 @@ public class ObjectNeedItem : MonoBehaviour
         {
             if (isParentDialogue)
             {
-                dialogueTrigger = GetComponentInParent<DialogueTrigger>();
+                otherDialogueTrig = GetComponentInParent<DialogueTrigger>();
             }
         }
 
@@ -59,7 +69,11 @@ public class ObjectNeedItem : MonoBehaviour
                 HandleSearchItem();
             }
 
-            interactableObject.StopInteract();
+            /*interactableObject.StopInteract();*/
+            if (!isShowingDialogue || isDone)
+            {
+                interactableObject.StopInteract();
+            }
         }
     }
 
@@ -75,7 +89,6 @@ public class ObjectNeedItem : MonoBehaviour
                     InventoryItem inventoryItem = InventorySystem.instance.GetReferenceItemDataInInventory(itemName[i]);
                     InventorySystem.instance.Remove(inventoryItem.data.referenceData);
                 }
-
                 itemName[i] = null;
             }
         }
@@ -97,18 +110,34 @@ public class ObjectNeedItem : MonoBehaviour
 
     private void HandleItemFound()
     {
+        if (isShowingDialogue)
+        {
+            dialogueTrigger.enabled = false;
+            Debug.Log("DISABLE DIALOGUE");
+        }
+
         if (isChangeDialogue)
         {
-            dialogueTrigger.currentDialogue++;
+            otherDialogueTrig.currentDialogue++;
             if (forceStart)
             {
-                dialogueTrigger.TriggerDialogue();
+                otherDialogueTrig.TriggerDialogue();
             }
         }
 
         if (isActivateObj)
         {
             objToActivate.SetActive(true);
+
+            for(int i = 0; i < otherObjToActivate.Length; i++)
+            {
+                otherObjToActivate[i].SetActive(true);
+            }
+
+            for (int i = 0; i < otherObjToDeactivate.Length; i++)
+            {
+                otherObjToDeactivate[i].SetActive(false);
+            }
         }
 
         if (isASwitchObj)
@@ -119,6 +148,11 @@ public class ObjectNeedItem : MonoBehaviour
         if (isGiveItem)
         {
             objGiveItem.GiveItem();
+        }
+
+        if (isChangeToUntagged)
+        {
+            this.gameObject.tag = "Untagged";
         }
 
         isDone = true;

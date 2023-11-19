@@ -139,7 +139,7 @@ public class DoorObject : MonoBehaviour
 
     void TeleportAction()
     {
-        if(effectObj != null)
+        if (effectObj != null)
         {
             effectObj.SetActive(true);
         }
@@ -165,8 +165,11 @@ public class DoorObject : MonoBehaviour
     {
         if (isUnlocked == false)
         {
-            unlockerRenderer.sprite = unlockerSprite;
-            unlockAnim.SetTrigger("Unlock");
+            if (unlockAnim != null && unlockerRenderer != null)
+            {
+                unlockerRenderer.sprite = unlockerSprite;
+                unlockAnim.SetTrigger("Unlock");
+            }
         }
 
         if (isStopInteract)

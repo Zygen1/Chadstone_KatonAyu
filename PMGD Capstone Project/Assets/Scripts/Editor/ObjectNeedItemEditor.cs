@@ -53,7 +53,7 @@ public class ObjectNeedItemEditor : Editor
         if (objectNeedItem.isChangeDialogue)
         {
             objectNeedItem.isParentDialogue = EditorGUILayout.Toggle("Is Parent Dialogue", objectNeedItem.isParentDialogue);
-            objectNeedItem.dialogueTrigger = (DialogueTrigger)EditorGUILayout.ObjectField("Dialogue Trigger", objectNeedItem.dialogueTrigger, typeof(DialogueTrigger), true);
+            objectNeedItem.otherDialogueTrig = (DialogueTrigger)EditorGUILayout.ObjectField("Dialogue Trigger", objectNeedItem.otherDialogueTrig, typeof(DialogueTrigger), true);
             objectNeedItem.forceStart = EditorGUILayout.Toggle("Force Start Dialogue", objectNeedItem.forceStart);
         }
 
