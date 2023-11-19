@@ -60,7 +60,7 @@ public class SoundManager : MonoBehaviour
         PlayerPrefs.SetFloat("BGMVolume", volume);
     }
 
-    private void LoadBGMVolume()
+    public void LoadBGMVolume()
     {
         BGMSlider.value = PlayerPrefs.GetFloat("BGMVolume");
         ChangeBGMVolume();
@@ -73,7 +73,7 @@ public class SoundManager : MonoBehaviour
         PlayerPrefs.SetFloat("SFXVolume", volume);
     }
 
-    private void LoadSFXVolume()
+    public void LoadSFXVolume()
     {
         SFXSlider.value = PlayerPrefs.GetFloat("SFXVolume");
         ChangeSFXVolume();
@@ -82,5 +82,17 @@ public class SoundManager : MonoBehaviour
     public void UIClickSfx()
     {
         SFX.PlayOneShot(uiButton);
+    }
+
+    public void ChangeBGMVolumeFromAnotherScript(float volume)
+    {
+        audioMixer.SetFloat("BGM", Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat("BGMVolume", volume);
+    }
+
+    public void ChangeSFXVolumeFromAnotherScript(float volume)
+    {
+        audioMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat("SFXVolume", volume);
     }
 }

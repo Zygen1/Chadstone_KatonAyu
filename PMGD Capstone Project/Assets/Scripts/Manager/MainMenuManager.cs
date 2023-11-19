@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
-    [Header("Scene")]
-    [SerializeField] string gameplayScene;
-
     [Header("Instruksi Panel")]
     [SerializeField] GameObject howToPlayPanel;
     [SerializeField] GameObject instruksiKey1OffBtn;
@@ -25,6 +22,10 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] GameObject pencapaianPanel;
     [SerializeField] GameObject fullStoryPanel;
     [SerializeField] GameObject[] endingList;
+
+    [Header("Slider For Sound Effect")]
+    [SerializeField] Slider BGMSlider;
+    [SerializeField] Slider SFXSlider;
 
     // Start is called before the first frame update
     void Start()
@@ -45,9 +46,9 @@ public class MainMenuManager : MonoBehaviour
         SoundManager.instance.UIClickSfx();
     }
 
-    public void ResumeGame()
+    public void ResumeGame(string scene_name)
     {
-        SceneManager.LoadScene(gameplayScene);
+        SceneManager.LoadScene(scene_name);
         SoundManager.instance.UIClickSfx();
     }
 
@@ -94,6 +95,8 @@ public class MainMenuManager : MonoBehaviour
     {
         settingPanel.SetActive(true);
         SoundManager.instance.UIClickSfx();
+        BGMSlider.value = PlayerPrefs.GetFloat("BGMVolume");
+        SFXSlider.value = PlayerPrefs.GetFloat("SFXVolume");
     }
 
     public void ExitGame()
@@ -160,5 +163,17 @@ public class MainMenuManager : MonoBehaviour
         settingPanel.SetActive(false);
         pencapaianPanel.SetActive(false);
         SoundManager.instance.UIClickSfx();
+    }
+
+    public void ChangeBGMVolume()
+    {
+        float volume = BGMSlider.value;
+        SoundManager.instance.ChangeBGMVolumeFromAnotherScript(volume);
+    }
+
+    public void ChangeSFXVolume()
+    {
+        float volume = SFXSlider.value;
+        SoundManager.instance.ChangeSFXVolumeFromAnotherScript(volume);
     }
 }
