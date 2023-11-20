@@ -52,7 +52,7 @@ public class PiecePuzzleSlideBox : MonoBehaviour
                 lastPos = transform.position;
                 transform.position = puzzleSlideBox.emptyPiece.transform.position;
                 puzzleSlideBox.emptyPiece.transform.position = lastPos;
-                //Debug.Log("Move piece");
+                Debug.LogWarning("Move piece");
             }
         }
     }

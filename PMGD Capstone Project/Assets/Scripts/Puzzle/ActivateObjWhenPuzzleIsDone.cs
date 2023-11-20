@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ActivateObjWhenPuzzleIsDone : MonoBehaviour
 {
-    [SerializeField] GameObject objToSetActive;
+    [SerializeField] GameObject[] objToSetActive;
 
     PuzzleStats stats;
     bool activateIsDone;
@@ -20,7 +18,10 @@ public class ActivateObjWhenPuzzleIsDone : MonoBehaviour
     {
         if (stats.isDone && !activateIsDone)
         {
-            objToSetActive.SetActive(true);
+            for(int i = 0; i < objToSetActive.Length; i++)
+            {
+                objToSetActive[i].SetActive(true);
+            }
             activateIsDone = true;
         }
     }

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc5ebe14b4e7d454bb4835ff72d96e4c, type: 3}
+  m_Name: SlideBoxPuzzlePiece
+  m_EditorClassIdentifier: 
+  id: InventoryItem_PuzzlePiece
+  displayName: Slide Puzzle Piece
+  icon: {fileID: -960494088, guid: ac74288358b4f4c48ae2239162b0c90a, type: 3}
+  prefab: {fileID: 8581593045118454736, guid: 9d590dcd3a2b97d4db782c6de7013ac1, type: 3}
+  referenceData: {fileID: 11400000}
+  isUseEvent: 0
+  itemEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  dontDestroyWhenUse: 0
+  isAnEquipment: 0
+  equipmentName: 

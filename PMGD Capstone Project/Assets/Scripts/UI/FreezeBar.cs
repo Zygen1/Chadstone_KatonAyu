@@ -7,10 +7,15 @@ public class FreezeBar : MonoBehaviour
 {
     [SerializeField] PlayerStats playerStats;
     [SerializeField] Slider slider;
+    [SerializeField] Material freezinMaterial;
+
+    [Header("Debug")]
+    [SerializeField] float freezePrecentage;
 
     // Start is called before the first frame update
     void Start()
     {
+        
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
         slider = GetComponent<Slider>();
     }
@@ -18,7 +23,11 @@ public class FreezeBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float freezePrecentage = playerStats.currentFreezing / playerStats.maxFreezing;
+
+        freezePrecentage = playerStats.currentFreezing / playerStats.maxFreezing;
+        freezePrecentage = Mathf.Clamp01(freezePrecentage);
+
         slider.value = freezePrecentage;
+        freezinMaterial.SetFloat("_FullscreenIntensity", freezePrecentage);
     }
 }

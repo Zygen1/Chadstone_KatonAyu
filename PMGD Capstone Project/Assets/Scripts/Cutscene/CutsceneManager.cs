@@ -6,7 +6,10 @@ public class CutsceneManager : MonoBehaviour
 {
     [Header("Atribut")]
     [SerializeField] bool isLiveScene;
+
+    [Header("Is Has Dialogue")]
     [SerializeField] bool isHasDialogue;
+    public bool onDialogueEndRunAfcut;
 
     [Header("Before Cutscene")]
     public GameObject[] befcutObjToSetActive;
@@ -17,6 +20,7 @@ public class CutsceneManager : MonoBehaviour
 
     [Header("Requirment")]
     public AudioListener playerAudioListener;
+    DialogueManager dialogueManager;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +46,7 @@ public class CutsceneManager : MonoBehaviour
         {
             DialogueTrigger dialogueTrigger = GetComponent<DialogueTrigger>();
             dialogueTrigger.TriggerDialogue();
+            dialogueManager = GetComponentInParent<DialogueManager>();
         }
 
         //Looping untuk mengaktifkan obj sebelum cutscene
@@ -82,5 +87,10 @@ public class CutsceneManager : MonoBehaviour
     {
         Animator animator = GetComponent<Animator>();
         animator.SetBool("NextState", false);
+    }
+
+    public void SetTypingSpeed(float speed)
+    {
+        dialogueManager.typingSpeed = speed;
     }
 }

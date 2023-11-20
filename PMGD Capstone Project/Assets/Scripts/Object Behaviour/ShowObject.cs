@@ -11,6 +11,9 @@ public class ShowObject : MonoBehaviour
     /*[Header("Debug")]
     [SerializeField] bool isShowing;*/
 
+    [Header("Optional")]
+    [SerializeField] BoxCollider2D[] disableColidersWhenShowing;
+
     InteractableObject interactableObject;
 
     // Start is called before the first frame update
@@ -23,5 +26,13 @@ public class ShowObject : MonoBehaviour
     void Update()
     {
         objToShow.SetActive(interactableObject.isInteracted);
+        
+        if(disableColidersWhenShowing != null)
+        {
+            for (int i = 0; i < disableColidersWhenShowing.Length; i++)
+            {
+                disableColidersWhenShowing[i].enabled = !interactableObject.isInteracted;
+            }
+        }
     }
 }

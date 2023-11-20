@@ -8,6 +8,7 @@ public class InventorySystem : MonoBehaviour
     public static InventorySystem instance;
 
     public GameObject itemParent;
+    public InventoryItemData[] startingItems;
 
     public List<InventoryItem> inventory { get; private set; }
     public event Action onInventoryChangeEvent;
@@ -17,13 +18,26 @@ public class InventorySystem : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        inventory = new List<InventoryItem> ();
-        m_itemDictionary = new Dictionary<InventoryItemData, InventoryItem> ();
+        inventory = new List<InventoryItem>();
+        m_itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(DelayStartingItem());
+    }
+
+    IEnumerator DelayStartingItem()
+    {
+        Debug.Log("Coroutine Start");
+        yield return new WaitForSeconds(0.1f);
+        AddStartingItems();
+        Debug.Log("Coroutine End");
     }
 
     public InventoryItem Get(InventoryItemData referenceData)
     {
-        if(m_itemDictionary.TryGetValue (referenceData, out InventoryItem value))
+        if (m_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
         {
             return value;
         }
@@ -33,7 +47,7 @@ public class InventorySystem : MonoBehaviour
 
     public void Add(InventoryItemData referenceData)
     {
-        if(m_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
+        if (m_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
         {
             value.AddToStack();
         }
@@ -49,15 +63,16 @@ public class InventorySystem : MonoBehaviour
             onInventoryChangeEvent.Invoke();
         }
 
+        Debug.Log("ItemAdded");
     }
 
     public void Remove(InventoryItemData referenceData)
     {
-        if(m_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
+        if (m_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
         {
             value.RemoveFromStack();
 
-            if(value.stackSize == 0)
+            if (value.stackSize == 0)
             {
                 inventory.Remove(value);
                 m_itemDictionary.Remove(referenceData);
@@ -74,7 +89,7 @@ public class InventorySystem : MonoBehaviour
     [ContextMenu("Check List Inventory")]
     void DebugListInventory()
     {
-        for(int i = 0; i < inventory.Count; i++)
+        for (int i = 0; i < inventory.Count; i++)
         {
             Debug.Log("Item " + i + " : " + inventory[i]);
         }
@@ -106,6 +121,18 @@ public class InventorySystem : MonoBehaviour
         }
 
         return null;
+    }
+
+    [ContextMenu("Add Starting Items")]
+    public void AddStartingItems()
+    {
+        if (startingItems != null && startingItems.Length > 0)
+        {
+            for (int i = 0; i < startingItems.Length; i++)
+            {
+                Add(startingItems[i]);
+            }
+        }
     }
 }
 
