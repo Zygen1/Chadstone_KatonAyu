@@ -21,7 +21,10 @@ public class PuzzleObject : MonoBehaviour
     [Header("Requirment")]
     [HideInInspector] public GameObject realPuzzle;
     [HideInInspector] public PuzzleStats puzzleStats;
-    
+
+    [Header("Optional")]
+    [SerializeField] BoxCollider2D[] disableColidersWhenShowing;
+
     InteractableObject interactableObject;
     bool itemIsDestroyed;
 
@@ -46,6 +49,14 @@ public class PuzzleObject : MonoBehaviour
         {
             destroyItemInventory.DestroyItem(itemName);
             itemIsDestroyed = true;
+        }
+
+        if (disableColidersWhenShowing != null)
+        {
+            for (int i = 0; i < disableColidersWhenShowing.Length; i++)
+            {
+                disableColidersWhenShowing[i].enabled = !interactableObject.isInteracted;
+            }
         }
     }
 

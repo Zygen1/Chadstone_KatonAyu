@@ -15,7 +15,7 @@ MonoBehaviour:
   id: InventoryItem_Bensin
   displayName: Bensin
   icon: {fileID: 21300000, guid: 758a6b29ecdefed40b7c5d265293ef1c, type: 3}
-  prefab: {fileID: 2683654759441632646, guid: a8f18d0d419fc7447913fcaabd42164c, type: 3}
+  prefab: {fileID: 811738404745343368, guid: b2b6e771ef00ce348acc049406386211, type: 3}
   referenceData: {fileID: 11400000}
   isUseEvent: 0
   itemEvent:

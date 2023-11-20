@@ -91,6 +91,7 @@ public class DoorObject : MonoBehaviour
             {
                 HandleItemUnlock();
             }
+
             PerformAction();
         }
 
@@ -249,7 +250,6 @@ public class DoorObject : MonoBehaviour
                 {
                     destroyItemInventory.DestroyItem(itemName[i]);
                 }
-
                 itemName[i] = null;
             }
         }
@@ -270,6 +270,12 @@ public class DoorObject : MonoBehaviour
             //NOTIFIKASI ///////////////////////////////////////////////////////
             Debug.Log("Locked");
             //END NOTIFIKASI ///////////////////////////////////////////////////
+            if (showDialogOnLock)
+            {
+                interactableObject.StopInteract();
+                dialogueTrigger.enabled = true;
+                dialogueTrigger.TriggerDialogue();
+            }
         }
     }
 

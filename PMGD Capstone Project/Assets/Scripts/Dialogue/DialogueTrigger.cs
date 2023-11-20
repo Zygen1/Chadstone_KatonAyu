@@ -11,6 +11,7 @@ public class DialogueTrigger : MonoBehaviour
     public TriggerMethod triggerMethod;
     public int currentDialogue;
     public Dialogue[] dialogue;
+    public bool checkFirst;
 
     [Header("Requirment")]
     //[SerializeField] DialoguableObject dialogueObject;
@@ -30,7 +31,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void Update()
     {
-        if(triggerMethod == TriggerMethod.DIALOGUE_INTERACT)
+        if (triggerMethod == TriggerMethod.DIALOGUE_INTERACT)
         {
             /*if (dialogueObject.isThereDialogue)
             {
@@ -39,10 +40,13 @@ public class DialogueTrigger : MonoBehaviour
                 *//*PlayerStats.instance.isPlayerDialogue = false;*//*
             }*/
 
-            if (interactableObject.isInteracted)
+            if (!checkFirst)
             {
-                TriggerDialogue();
-                interactableObject.isInteracted = false;
+                if (interactableObject.isInteracted)
+                {
+                    TriggerDialogue();
+                    interactableObject.isInteracted = false;
+                }
             }
         }
     }
