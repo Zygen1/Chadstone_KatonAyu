@@ -5,12 +5,22 @@ using UnityEngine;
 public class CutsceneTrigger : MonoBehaviour
 {
     public GameObject cutscene;
-
+    [Header("Interact")]
+    public bool interactTrigger;
+    public InteractableObject interactableObject;
 
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+    private void Update()
+    {
+        if (interactableObject.isInteracted)
+        {
+            cutscene.SetActive(true);
+            interactableObject.StopInteract();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
