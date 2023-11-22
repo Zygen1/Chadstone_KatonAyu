@@ -8,6 +8,7 @@ public class ItemObject : MonoBehaviour
     public InventoryItemData referenceItem;
     InteractableObject interactableObject;
 
+    public string itemName;
     public bool onClickPick;
 
     [Header("SetObject")]

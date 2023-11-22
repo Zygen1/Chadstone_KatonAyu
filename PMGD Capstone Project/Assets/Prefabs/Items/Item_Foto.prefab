@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   referenceItem: {fileID: 11400000, guid: 0cdb1188825af984481841923bd9d211, type: 2}
+  itemName: Foto
   onClickPick: 1
   isSetObject: 1
   deactiveObj:

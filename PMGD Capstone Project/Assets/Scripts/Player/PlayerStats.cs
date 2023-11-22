@@ -49,5 +49,9 @@ public class PlayerStats : MonoBehaviour
             currentFreezing -= freezingRecovery * Time.deltaTime;
         }
         
+        if(currentFreezing >= 9.9f)
+        {
+            LevelManager.instance.isGameOver = true;
+        }
     }
 }

@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   referenceItem: {fileID: 11400000, guid: e647b6400048d1545a3f76ce907410e3, type: 2}
+  itemName: Kunci
   onClickPick: 1
   isSetObject: 1
   deactiveObj:
