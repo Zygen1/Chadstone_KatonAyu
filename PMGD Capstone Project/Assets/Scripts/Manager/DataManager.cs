@@ -4,6 +4,10 @@ using System.IO;
 [System.Serializable]
 public class SaveData
 {
+    //Player Pos
+    public Vector3 saved_PlayerPosition;
+    //public Vector3 saved_MainCamPosition;
+
     //Room Condition
     public bool saved_IsRoom1Unlock;
     public bool saved_IsRoom2Unlock;
@@ -22,16 +26,13 @@ public class SaveData
     public bool saved_Itm_IsBallPicked;
 }
 
-[System.Serializable]
-public class SavedData
-{
-    public string dataName;
-    public bool dataCondition;
-}
-
 public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
+
+    //Player pos
+    public Vector3 playerPosition;
+    //public Vector3 mainCamPosition;
 
     //Room condition
     public bool isRoom1Unlock;
@@ -73,6 +74,8 @@ public class DataManager : MonoBehaviour
     {
         SaveData saveData = new SaveData();
 
+        saveData.saved_PlayerPosition = playerPosition;
+        //saveData.saved_MainCamPosition = mainCamPosition;
         saveData.saved_IsRoom1Unlock = isRoom1Unlock;
         saveData.saved_IsRoom2Unlock = isRoom2Unlock;
         saveData.saved_IsRoom3Unlock = isRoom3Unlock;
@@ -98,6 +101,8 @@ public class DataManager : MonoBehaviour
             string json = File.ReadAllText(savePath);
             SaveData saveData = JsonUtility.FromJson<SaveData>(json);
 
+            playerPosition = saveData.saved_PlayerPosition;
+            //mainCamPosition = saveData.saved_MainCamPosition;
             isRoom1Unlock = saveData.saved_IsRoom1Unlock;
             isRoom2Unlock = saveData.saved_IsRoom2Unlock;
             isRoom3Unlock = saveData.saved_IsRoom3Unlock;
@@ -114,8 +119,11 @@ public class DataManager : MonoBehaviour
         }
     }
 
+    [ContextMenu("Reset Data")]
     public void ResetData()
     {
+        playerPosition = new Vector3(0.45f, 3.95f, 0);
+        //mainCamPosition = new Vector3(0, 0, 0);
         isRoom1Unlock = false;
         isRoom2Unlock = false;
         isRoom3Unlock = false;

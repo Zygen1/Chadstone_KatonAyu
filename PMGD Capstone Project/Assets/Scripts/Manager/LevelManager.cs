@@ -7,15 +7,17 @@ public class LevelManager : MonoBehaviour
     public static LevelManager instance;
 
     [Header("Data")]
-    public GameObject lockedRoom1;
-    public GameObject lockedRoom2;
-    public GameObject lockedRoom3;
-    public GameObject lockedRoom4;
-    public GameObject unlockedRoom1;
-    public GameObject unlockedRoom2;
-    public GameObject unlockedRoom3;
-    public GameObject unlockedRoom4;
-    public ObjectSpawner[] objectSpawners;
+    public GameObject player;
+    public GameObject mainCam;
+    public GameObject[] envLockedRoom1;
+    public GameObject[] envLockedRoom2;
+    public GameObject[] envLockedRoom3;
+    public GameObject[] envLockedRoom4;
+    public GameObject[] envUnlockedRoom1;
+    public GameObject[] envUnlockedRoom2;
+    public GameObject[] envUnlockedRoom3;
+    public GameObject[] envUnlockedRoom4;
+    public GameObject[] items;
 
     [Header("Gameover")]
     public bool isGameOver;
@@ -30,8 +32,8 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //DataManager.instance.LoadData();
-        //SetData();
+        DataManager.instance.LoadData();
+        SetData();
     }
 
     // Update is called once per frame
@@ -42,48 +44,70 @@ public class LevelManager : MonoBehaviour
 
     void SetData()
     {
-        lockedRoom1.SetActive(!DataManager.instance.isRoom1Unlock);
-        lockedRoom2.SetActive(!DataManager.instance.isRoom2Unlock);
-        lockedRoom3.SetActive(!DataManager.instance.isRoom3Unlock);
-        lockedRoom4.SetActive(!DataManager.instance.isRoom4Unlock);
+        player.transform.position = DataManager.instance.playerPosition;
+        //mainCam.transform.position = DataManager.instance.mainCamPosition;
 
-        unlockedRoom1.SetActive(DataManager.instance.isRoom1Unlock);
-        unlockedRoom2.SetActive(DataManager.instance.isRoom2Unlock);
-        unlockedRoom3.SetActive(DataManager.instance.isRoom3Unlock);
-        unlockedRoom4.SetActive(DataManager.instance.isRoom4Unlock);
-
-        if (DataManager.instance.itm_IsKorekApiPicked == false) { RespawnObject("Korek Api Spawner"); }
-        if (DataManager.instance.itm_IsKertasCluePicked == false) { RespawnObject("Kertas Clue Spawner"); }
-        if (DataManager.instance.itm_IsFotoPicked == false) { RespawnObject("Foto Spawner"); }
-        if (DataManager.instance.itm_IsBensinPicked == false) { RespawnObject("Bensin Spawner"); }
-        if (DataManager.instance.itm_IsKayuPicked == false) { RespawnObject("Kayu Spawner"); }
-        if (DataManager.instance.itm_IsBingkaiPicked == false) { RespawnObject("Bingkai Spawner"); }
-        if (DataManager.instance.itm_IsSlidePuzzlePiecePicked == false) { RespawnObject("Slide Puzzle Piece Spawner"); }
-        if (DataManager.instance.itm_IsKeyPicked == false) { RespawnObject("Key Spawner"); }
-        if (DataManager.instance.itm_IsBallPicked == false) { RespawnObject("Ball Spawner"); }
-    }
-
-    bool CheckItem(string itemName)
-    {
-        ItemObject[] itemObjects = GameObject.FindObjectsOfType<ItemObject>();
-        for(int i = 0; i < itemObjects.Length; i++)
+        if (DataManager.instance.isRoom1Unlock == true)
         {
-            if(itemObjects[i].itemName == itemName)
+            for (int i = 0; i < envLockedRoom1.Length; i++)
             {
-                return true;
+                envLockedRoom1[i].gameObject.SetActive(false);
+            }
+            for (int i = 0; i < envUnlockedRoom1.Length; i++)
+            {
+                envUnlockedRoom1[i].gameObject.SetActive(true);
+            }
+        }
+        if (DataManager.instance.isRoom2Unlock == true)
+        {
+            for (int i = 0; i < envLockedRoom2.Length; i++)
+            {
+                envLockedRoom2[i].gameObject.SetActive(false);
+            }
+            for (int i = 0; i < envUnlockedRoom2.Length; i++)
+            {
+                envUnlockedRoom2[i].gameObject.SetActive(true);
+            }
+        }
+        if (DataManager.instance.isRoom3Unlock == true)
+        {
+            for (int i = 0; i < envLockedRoom3.Length; i++)
+            {
+                envLockedRoom3[i].gameObject.SetActive(false);
+            }
+            for (int i = 0; i < envUnlockedRoom3.Length; i++)
+            {
+                envUnlockedRoom3[i].gameObject.SetActive(true);
+            }
+        }
+        if (DataManager.instance.isRoom4Unlock == true)
+        {
+            for (int i = 0; i < envLockedRoom4.Length; i++)
+            {
+                envLockedRoom4[i].gameObject.SetActive(false);
+            }
+            for (int i = 0; i < envUnlockedRoom4.Length; i++)
+            {
+                envUnlockedRoom4[i].gameObject.SetActive(true);
             }
         }
 
-        return false;
+        /*if (DataManager.instance.itm_IsKorekApiPicked)
+        {
+            SetItems
+        }*/
+
+        Debug.Log("Data Set");
     }
 
-    void RespawnObject(string spawnerName)
+    void SetItems(string itemName)
     {
-        for(int i = 0; i < objectSpawners.Length; i++)
+        for (int i = 0; i < items.Length; i++)
         {
-            if(objectSpawners[i].spawnerName == spawnerName)
+            ItemObject io = items[i].GetComponent<ItemObject>();
+            if(io.itemName == itemName)
             {
-                objectSpawners[i].SpawnObject();
+                items[i].SetActive(false);
             }
         }
     }
