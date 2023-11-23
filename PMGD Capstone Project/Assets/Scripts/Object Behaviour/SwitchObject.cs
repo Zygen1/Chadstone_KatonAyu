@@ -8,6 +8,8 @@ public class SwitchObject : MonoBehaviour
     [Header("Option")]
     [SerializeField] bool isOneShootInteract;
     [SerializeField] bool isSetOnWhenInteract;
+    [SerializeField] bool isChangeObjToInteractable;
+    [SerializeField] GameObject objToChange;
 
     [Header("Status")]
     public bool isOn;
@@ -34,6 +36,11 @@ public class SwitchObject : MonoBehaviour
             {
                 interactableObject.StopInteract();
             }
+        }
+
+        if (isOn && isChangeObjToInteractable)
+        {
+            objToChange.tag = "InteractableObject";
         }
     }
 }

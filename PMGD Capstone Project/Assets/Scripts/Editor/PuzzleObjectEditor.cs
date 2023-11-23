@@ -1,4 +1,4 @@
-using UnityEditor;
+/*using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(PuzzleObject))]
@@ -47,3 +47,4 @@ public class PuzzleObjectEditor : Editor
         puzzleObject.puzzleStats = (PuzzleStats)EditorGUILayout.ObjectField("Puzzle Stats", puzzleObject.puzzleStats, typeof(PuzzleStats), true);
     }
 }
+*/
