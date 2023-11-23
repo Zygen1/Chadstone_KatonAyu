@@ -225,7 +225,7 @@ public class DoorObject : MonoBehaviour
             else if (puzzleStats.puzzleName == puzzleName && !puzzleStats.isDone)
             {
                 //NOTIFIKASI ///////////////////////////////////////////////////////
-                Debug.Log("Locked");
+                //Debug.Log("Locked");
                 //END NOTIFIKASI ///////////////////////////////////////////////////
 
                 animator.SetBool("Open", false);
@@ -268,7 +268,7 @@ public class DoorObject : MonoBehaviour
         else
         {
             //NOTIFIKASI ///////////////////////////////////////////////////////
-            Debug.Log("Locked");
+            //Debug.Log("Locked");
             //END NOTIFIKASI ///////////////////////////////////////////////////
             if (showDialogOnLock)
             {
@@ -290,7 +290,7 @@ public class DoorObject : MonoBehaviour
             else
             {
                 //NOTIFIKASI ///////////////////////////////////////////////////////
-                Debug.Log("Locked");
+                //Debug.Log("Locked");
                 //END NOTIFIKASI ///////////////////////////////////////////////////
 
                 switchUnlock = 0;

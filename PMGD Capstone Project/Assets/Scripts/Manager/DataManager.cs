@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 using System.IO;
 
 [System.Serializable]
@@ -14,17 +15,17 @@ public class SaveData
     public bool saved_IsRoom3Unlock;
     public bool saved_IsRoom4Unlock;
 
-    //Item condition
-    public bool saved_Itm_IsKorekApiPicked;
-    public bool saved_Itm_IsKertasCluePicked;
-    public bool saved_Itm_IsFotoPicked;
-    public bool saved_Itm_IsBensinPicked;
-    public bool saved_Itm_IsKayuPicked;
-    public bool saved_Itm_IsBingkaiPicked;
-    public bool saved_Itm_IsSlidePuzzlePiecePicked;
-    public bool saved_Itm_IsKeyPicked;
-    public bool saved_Itm_IsBallPicked;
+    public List<ItemData> saved_ItemPickedStatus;
+    public List<ItemData> saved_ItemUsedStatus;
 }
+
+[System.Serializable]
+public class ItemData
+{
+    public string key;
+    public bool value;
+}
+
 
 public class DataManager : MonoBehaviour
 {
@@ -32,7 +33,6 @@ public class DataManager : MonoBehaviour
 
     //Player pos
     public Vector3 playerPosition;
-    //public Vector3 mainCamPosition;
 
     //Room condition
     public bool isRoom1Unlock;
@@ -40,16 +40,8 @@ public class DataManager : MonoBehaviour
     public bool isRoom3Unlock;
     public bool isRoom4Unlock;
 
-    //Item condition
-    public bool itm_IsKorekApiPicked;
-    public bool itm_IsKertasCluePicked;
-    public bool itm_IsFotoPicked;
-    public bool itm_IsBensinPicked;
-    public bool itm_IsKayuPicked;
-    public bool itm_IsBingkaiPicked;
-    public bool itm_IsSlidePuzzlePiecePicked;
-    public bool itm_IsKeyPicked;
-    public bool itm_IsBallPicked;
+    public Dictionary<string, bool> itemPickedStatus;
+    public Dictionary<string, bool> itemUsedStatus;
 
     private string savePath;
 
@@ -66,34 +58,27 @@ public class DataManager : MonoBehaviour
         DontDestroyOnLoad(this);
 
         savePath = Path.Combine(Application.persistentDataPath, "savedata.json");
-
-        LoadData();
     }
 
+    [ContextMenu("Save")]
     public void SaveData()
     {
         SaveData saveData = new SaveData();
 
         saveData.saved_PlayerPosition = playerPosition;
-        //saveData.saved_MainCamPosition = mainCamPosition;
         saveData.saved_IsRoom1Unlock = isRoom1Unlock;
         saveData.saved_IsRoom2Unlock = isRoom2Unlock;
         saveData.saved_IsRoom3Unlock = isRoom3Unlock;
         saveData.saved_IsRoom4Unlock = isRoom4Unlock;
-        saveData.saved_Itm_IsKorekApiPicked = itm_IsKorekApiPicked;
-        saveData.saved_Itm_IsKertasCluePicked = itm_IsKertasCluePicked;
-        saveData.saved_Itm_IsFotoPicked = itm_IsFotoPicked;
-        saveData.saved_Itm_IsBensinPicked = itm_IsBensinPicked;
-        saveData.saved_Itm_IsKayuPicked = itm_IsKayuPicked;
-        saveData.saved_Itm_IsBingkaiPicked = itm_IsBingkaiPicked;
-        saveData.saved_Itm_IsSlidePuzzlePiecePicked = itm_IsSlidePuzzlePiecePicked;
-        saveData.saved_Itm_IsKeyPicked = itm_IsKeyPicked;
-        saveData.saved_Itm_IsBallPicked = itm_IsBallPicked;
 
-    string json = JsonUtility.ToJson(saveData);
+        saveData.saved_ItemPickedStatus = ConvertDictionaryToList(itemPickedStatus);
+        saveData.saved_ItemUsedStatus = ConvertDictionaryToList(itemUsedStatus);
+
+        string json = JsonUtility.ToJson(saveData);
         File.WriteAllText(savePath, json);
     }
 
+    [ContextMenu("Load")]
     public void LoadData()
     {
         if (File.Exists(savePath))
@@ -102,45 +87,88 @@ public class DataManager : MonoBehaviour
             SaveData saveData = JsonUtility.FromJson<SaveData>(json);
 
             playerPosition = saveData.saved_PlayerPosition;
-            //mainCamPosition = saveData.saved_MainCamPosition;
             isRoom1Unlock = saveData.saved_IsRoom1Unlock;
             isRoom2Unlock = saveData.saved_IsRoom2Unlock;
             isRoom3Unlock = saveData.saved_IsRoom3Unlock;
             isRoom4Unlock = saveData.saved_IsRoom4Unlock;
-            itm_IsKorekApiPicked = saveData.saved_Itm_IsKorekApiPicked;
-            itm_IsKertasCluePicked = saveData.saved_Itm_IsKertasCluePicked;
-            itm_IsFotoPicked = saveData.saved_Itm_IsFotoPicked;
-            itm_IsBensinPicked = saveData.saved_Itm_IsBensinPicked;
-            itm_IsKayuPicked = saveData.saved_Itm_IsKayuPicked;
-            itm_IsBingkaiPicked = saveData.saved_Itm_IsBingkaiPicked;
-            itm_IsSlidePuzzlePiecePicked = saveData.saved_Itm_IsSlidePuzzlePiecePicked;
-            itm_IsKeyPicked = saveData.saved_Itm_IsKeyPicked;
-            itm_IsBallPicked = saveData.saved_Itm_IsBallPicked;
+
+            itemPickedStatus = ConvertListToDictionary(saveData.saved_ItemPickedStatus);
+            itemUsedStatus = ConvertListToDictionary(saveData.saved_ItemUsedStatus);
+        }
+        else
+        {
+            itemPickedStatus = new Dictionary<string, bool>();
+            itemUsedStatus = new Dictionary<string, bool>();
         }
     }
+
 
     [ContextMenu("Reset Data")]
     public void ResetData()
     {
         playerPosition = new Vector3(0.45f, 3.95f, 0);
-        //mainCamPosition = new Vector3(0, 0, 0);
         isRoom1Unlock = false;
         isRoom2Unlock = false;
         isRoom3Unlock = false;
         isRoom4Unlock = false;
-        isRoom1Unlock = false;
-        isRoom2Unlock = false;
-        isRoom3Unlock = false;
-        isRoom4Unlock = false;
-        itm_IsKorekApiPicked = false;
-        itm_IsKertasCluePicked = false;
-        itm_IsFotoPicked = false;
-        itm_IsBensinPicked = false;
-        itm_IsKayuPicked = false;
-        itm_IsBingkaiPicked = false;
-        itm_IsSlidePuzzlePiecePicked = false;
-        itm_IsKeyPicked = false;
-        itm_IsBallPicked = false;
+
+        if (itemPickedStatus != null)
+        {
+            itemPickedStatus.Clear();
+        }
+        else
+        {
+            itemPickedStatus = new Dictionary<string, bool>();
+        }
+
+        if (itemUsedStatus != null)
+        {
+            itemUsedStatus.Clear();
+        }
+        else
+        {
+            itemUsedStatus = new Dictionary<string, bool>();
+        }
         SaveData();
+        Debug.Log("Data Reset");
+    }
+
+    [ContextMenu("Display Dictionary")]
+    public void DisplayItemStatus()
+    {
+        Debug.Log("Item Picked Status:");
+        foreach (KeyValuePair<string, bool> pair in itemPickedStatus)
+        {
+            Debug.Log(pair.Key + ": " + pair.Value);
+        }
+
+        Debug.Log("Item Used Status:");
+        foreach (KeyValuePair<string, bool> pair in itemUsedStatus)
+        {
+            Debug.Log(pair.Key + ": " + pair.Value);
+        }
+    }
+
+    private List<ItemData> ConvertDictionaryToList(Dictionary<string, bool> dictionary)
+    {
+        List<ItemData> list = new List<ItemData>();
+        foreach (KeyValuePair<string, bool> pair in dictionary)
+        {
+            ItemData itemData = new ItemData();
+            itemData.key = pair.Key;
+            itemData.value = pair.Value;
+            list.Add(itemData);
+        }
+        return list;
+    }
+
+    private Dictionary<string, bool> ConvertListToDictionary(List<ItemData> list)
+    {
+        Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
+        foreach (ItemData itemData in list)
+        {
+            dictionary[itemData.key] = itemData.value;
+        }
+        return dictionary;
     }
 }
