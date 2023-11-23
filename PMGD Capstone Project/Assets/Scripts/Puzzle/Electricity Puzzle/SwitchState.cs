@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SwitchState : MonoBehaviour
 {
     public GameObject switchUp;
+    public GameObject switchDown;
     public GameObject lightsOn;
     public bool isUp;
     public bool isOn;
@@ -32,7 +34,17 @@ public class SwitchState : MonoBehaviour
         isUp = !isUp;
         isOn = !isOn;
 
-        switchUp.SetActive(isUp);
+        if (isUp == true)
+        {
+            switchUp.SetActive(true);
+            switchDown.SetActive(false);
+        }
+        else
+        {
+            switchUp.SetActive(false);
+            switchDown.SetActive(true);
+        }
+
         lightsOn.SetActive(isOn);
 
         if (isOn)
