@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   referenceItem: {fileID: 11400000, guid: e9b94221f3fb6f2428075717c3b7457e, type: 2}
+  itemName: Kayu
   onClickPick: 1
   isSetObject: 1
   deactiveObj:

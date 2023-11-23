@@ -8,6 +8,7 @@ public class ItemObject : MonoBehaviour
     public InventoryItemData referenceItem;
     InteractableObject interactableObject;
 
+    //public string itemName;
     public bool onClickPick;
 
     [Header("SetObject")]
@@ -40,6 +41,7 @@ public class ItemObject : MonoBehaviour
             SetObject();
         }
 
+        DataItemIsPicked();
         Destroy(gameObject);
     }
 
@@ -56,6 +58,7 @@ public class ItemObject : MonoBehaviour
                 SetObject();
             }
 
+            DataItemIsPicked();
             Destroy(gameObject);
         }
     }
@@ -74,4 +77,28 @@ public class ItemObject : MonoBehaviour
 
         Debug.Log("SetObject");
     }
+
+    void DataItemIsPicked()
+    {
+        string itemName = referenceItem.displayName;
+
+        if (DataManager.instance != null)
+        {
+            // Pastikan kunci sudah ada atau tambahkan jika belum ada
+            if (!DataManager.instance.itemPickedStatus.ContainsKey(itemName))
+            {
+                DataManager.instance.itemPickedStatus.Add(itemName, true); // Tambahkan kunci dengan nilai true
+            }
+            else
+            {
+                DataManager.instance.itemPickedStatus[itemName] = true; // Update nilai jika kunci sudah ada
+            }
+        }
+        else
+        {
+            Debug.LogError("DataManager.instance is null!");
+            // Atau pesan kesalahan lain yang membantu dalam penelusuran
+        }
+    }
+
 }

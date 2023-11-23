@@ -14,7 +14,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main Scene/Gameplay_DalamRumah.unity
     guid: 9570a95fa3fad5340a09ed3d4350dfe6
-  - enabled: 1
-    path: Assets/Scenes/Ruangan 5.unity
-    guid: 7c1c9cb3c3cbec34f9a16cf1c5750add
   m_configObjects: {}

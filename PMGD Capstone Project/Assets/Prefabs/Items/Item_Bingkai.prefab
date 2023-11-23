@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   referenceItem: {fileID: 11400000, guid: e3ca91886c1d3b146ae64ae194c6d11c, type: 2}
+  itemName: Bingkai
   onClickPick: 1
   isSetObject: 0
   deactiveObj: []

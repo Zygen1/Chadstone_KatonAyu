@@ -35,7 +35,7 @@ public class CombinationLockPuzzle : MonoBehaviour
 
     private bool CheckCombination()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             if (dialsValue[i].dialsValue != password[i])
             {

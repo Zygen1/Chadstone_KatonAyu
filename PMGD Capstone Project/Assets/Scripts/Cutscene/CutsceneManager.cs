@@ -20,7 +20,7 @@ public class CutsceneManager : MonoBehaviour
 
     [Header("Requirment")]
     public AudioListener playerAudioListener;
-    DialogueManager dialogueManager;
+    [SerializeField] DialogueManager dialogueManager;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +60,8 @@ public class CutsceneManager : MonoBehaviour
         {
             befcutObjToSetInactive[i].SetActive(false);
         }
+
+        Debug.Log("BEFVCU");
     }
 
     public void AfterCutscene()

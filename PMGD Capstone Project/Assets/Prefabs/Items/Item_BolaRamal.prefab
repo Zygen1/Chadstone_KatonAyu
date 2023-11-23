@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   referenceItem: {fileID: 11400000, guid: 0ae701d568fafdf4e978e34cb14262a7, type: 2}
+  itemName: Bola
   onClickPick: 1
   isSetObject: 1
   deactiveObj:

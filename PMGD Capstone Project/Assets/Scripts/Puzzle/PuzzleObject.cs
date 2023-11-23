@@ -6,21 +6,21 @@ using UnityEngine;
 public class PuzzleObject : MonoBehaviour
 {
     [Header("Puzzle Need Item")]
-    [HideInInspector] public bool isPuzzleNeedItem;
-    [HideInInspector] public string itemName;
-    [HideInInspector] public bool destroyItem;
-    [HideInInspector] public DestroyItemInventory destroyItemInventory;
-    [HideInInspector] public bool isShowingDialogue;
-    [HideInInspector] public DialogueTrigger dialogueTrigger;
+    public bool isPuzzleNeedItem;
+    public string itemName;
+    public bool destroyItem;
+    public DestroyItemInventory destroyItemInventory;
+    public bool isShowingDialogue;
+    public DialogueTrigger dialogueTrigger;
 
     [Header("Turn Obj To Interactable")]
-    [HideInInspector] public bool isChangeObjToInteractable;
-    [HideInInspector] public GameObject objToChange;
-    [HideInInspector] public bool isDeactiveWhenDone;
+    public bool isChangeObjToInteractable;
+    public GameObject objToChange;
+    public bool isDeactiveWhenDone;
 
     [Header("Requirment")]
-    [HideInInspector] public GameObject realPuzzle;
-    [HideInInspector] public PuzzleStats puzzleStats;
+    public GameObject realPuzzle;
+    public PuzzleStats puzzleStats;
 
     [Header("Optional")]
     [SerializeField] BoxCollider2D[] disableColidersWhenShowing;

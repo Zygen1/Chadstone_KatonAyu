@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SlideBoxPuzzlePiece
   m_EditorClassIdentifier: 
   id: InventoryItem_PuzzlePiece
-  displayName: Slide Puzzle Piece
+  displayName: Potongan Slide Puzzle
   icon: {fileID: -960494088, guid: ac74288358b4f4c48ae2239162b0c90a, type: 3}
   prefab: {fileID: 8581593045118454736, guid: 9d590dcd3a2b97d4db782c6de7013ac1, type: 3}
   referenceData: {fileID: 11400000}

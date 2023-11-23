@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   referenceItem: {fileID: 11400000, guid: d9b4356d8972b1d499e4849e44baa7af, type: 2}
+  itemName: Korek Api
   onClickPick: 1
   isSetObject: 0
   deactiveObj: []

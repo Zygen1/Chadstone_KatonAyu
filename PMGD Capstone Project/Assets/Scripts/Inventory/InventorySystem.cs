@@ -84,6 +84,22 @@ public class InventorySystem : MonoBehaviour
             onInventoryChangeEvent.Invoke();
         }
 
+        DataItemIsUsed(referenceData);
+    }
+
+    void DataItemIsUsed(InventoryItemData referenceData)
+    {
+        string itemName = referenceData.displayName;
+
+        // Pastikan kunci sudah ada atau tambahkan jika belum ada
+        if (!DataManager.instance.itemUsedStatus.ContainsKey(itemName))
+        {
+            DataManager.instance.itemUsedStatus.Add(itemName, true); // Tambahkan kunci dengan nilai true
+        }
+        else
+        {
+            DataManager.instance.itemUsedStatus[itemName] = true; // Update nilai jika kunci sudah ada
+        }
     }
 
     [ContextMenu("Check List Inventory")]

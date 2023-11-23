@@ -139,10 +139,10 @@ TextureImporter:
       name: pohon_alt2_0
       rect:
         serializedVersion: 2
-        x: 60
-        y: 2065
-        width: 1024
-        height: 1024
+        x: 0
+        y: 2059.3335
+        width: 1092
+        height: 1029.6666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,10 +160,10 @@ TextureImporter:
       name: pohon_alt2_1
       rect:
         serializedVersion: 2
-        x: 1084
-        y: 2065
-        width: 1024
-        height: 1024
+        x: 1092
+        y: 2059.3335
+        width: 1092
+        height: 1029.6666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,7 +171,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03c638ab42f665949bc5b89e0931bf6b
+      spriteID: a00a5fe301bb78d45a4aa2fb60947086
       internalID: 244729033
       vertices: []
       indices: 
@@ -181,10 +181,10 @@ TextureImporter:
       name: pohon_alt2_2
       rect:
         serializedVersion: 2
-        x: 60
-        y: 1041
-        width: 1024
-        height: 1024
+        x: 0
+        y: 1030.3334
+        width: 1092
+        height: 1029.6666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,7 +192,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 295dcd1e59d926842b1238671afed72c
+      spriteID: 165625945031b514bb2bd25ee3f894f6
       internalID: 114722028
       vertices: []
       indices: 
@@ -202,10 +202,10 @@ TextureImporter:
       name: pohon_alt2_3
       rect:
         serializedVersion: 2
-        x: 1084
-        y: 1041
-        width: 1024
-        height: 1024
+        x: 1092
+        y: 1030.3334
+        width: 1092
+        height: 1029.6666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,7 +213,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c2f48e02ceb56084f90284593126fc2e
+      spriteID: e1d6a42263b7e1d45954c3c973c4c98f
       internalID: 423079760
       vertices: []
       indices: 
@@ -223,10 +223,10 @@ TextureImporter:
       name: pohon_alt2_4
       rect:
         serializedVersion: 2
-        x: 60
-        y: 17
-        width: 1024
-        height: 1024
+        x: 0
+        y: 1.333374
+        width: 1092
+        height: 1029.6666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,7 +234,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c1a6d1d2bb06b4b4dbd1ece21a31d846
+      spriteID: aa4c421c2dcea19498a3daf98c613fe0
       internalID: 187763071
       vertices: []
       indices: 
@@ -244,10 +244,10 @@ TextureImporter:
       name: pohon_alt2_5
       rect:
         serializedVersion: 2
-        x: 1084
-        y: 17
-        width: 1024
-        height: 1024
+        x: 1092
+        y: 1.333374
+        width: 1092
+        height: 1029.6666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,7 +255,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 247213fcbb5e7d2419a48431db8bbcab
+      spriteID: 912232ddaaf89d94f9bf75fe53617348
       internalID: 1088973553
       vertices: []
       indices: 

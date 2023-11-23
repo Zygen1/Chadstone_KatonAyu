@@ -23,7 +23,7 @@ public class PlayerCam : MonoBehaviour
                 offsetIsSet = true;
             }
 
-            Vector3 targetPosition = player.position + offset;
+            Vector3 targetPosition = player.position + new Vector3(0, 0, offset.z);
             transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * Time.fixedDeltaTime);
         }
         else

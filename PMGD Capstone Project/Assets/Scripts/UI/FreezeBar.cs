@@ -11,13 +11,14 @@ public class FreezeBar : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] float freezePrecentage;
+    Color matColor;
 
     // Start is called before the first frame update
     void Start()
     {
-        
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
         slider = GetComponent<Slider>();
+        matColor = freezinMaterial.GetColor("_BaseColor");
     }
 
     // Update is called once per frame

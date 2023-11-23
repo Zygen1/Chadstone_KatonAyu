@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   referenceItem: {fileID: 11400000, guid: 7dac773b0bad48f45a8795a573a20e5a, type: 2}
+  itemName: Potongan Slide Puzzle
   onClickPick: 1
   isSetObject: 0
   deactiveObj: []
