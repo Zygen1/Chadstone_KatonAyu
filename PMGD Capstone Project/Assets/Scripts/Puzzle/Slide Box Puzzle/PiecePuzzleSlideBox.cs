@@ -8,6 +8,9 @@ public class PiecePuzzleSlideBox : MonoBehaviour
     /*[Header("Atribut")]
     [SerializeField] float moveSpeed;*/
 
+    [Header("Audio")]
+    [SerializeField] AudioSource audioSource;
+
     [Header("Debug")]
     [SerializeField] bool isCanMove;
     [SerializeField] Vector2 lastPos;
@@ -49,6 +52,11 @@ public class PiecePuzzleSlideBox : MonoBehaviour
         {
             if (isCanMove)
             {
+                if (audioSource != null)
+                {
+                    audioSource.Play();
+                }
+
                 lastPos = transform.position;
                 transform.position = puzzleSlideBox.emptyPiece.transform.position;
                 puzzleSlideBox.emptyPiece.transform.position = lastPos;

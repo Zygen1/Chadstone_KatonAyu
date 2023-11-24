@@ -22,6 +22,9 @@ public class DialogueManager : MonoBehaviour
     Animator currentCutsceneAnimator;
     CutsceneManager currentCutsceneManager;
 
+    [Header("Audio")]
+    [SerializeField] AudioSource audioSource;
+
     bool nextDialogueInput;
     private void Awake()
     {
@@ -97,7 +100,13 @@ public class DialogueManager : MonoBehaviour
     [ContextMenu("Display Next Dialogue")]
     public void DisplayNextSentence()
     {
-        if(sentences.Count == 0)
+        if (audioSource != null)
+        {
+            audioSource.Stop();
+            Debug.Log("AUDIO PLAY");
+        }
+
+        if (sentences.Count == 0)
         {
             EndDialogue();
             return;
@@ -119,6 +128,15 @@ public class DialogueManager : MonoBehaviour
         dialogue.text = "";
         foreach(char letter in sentence.ToCharArray())
         {
+            if(audioSource != null)
+            {
+                audioSource.Play();
+                Debug.Log("AUDIO PLAY");
+            }
+            else
+            {
+                Debug.Log("No Audio");
+            }
             dialogue.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
@@ -126,7 +144,13 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
-        if(currentDialogue != null && currentDialogueTrigger != null)
+        if (audioSource != null)
+        {
+            audioSource.Stop();
+            Debug.Log("AUDIO PLAY");
+        }
+
+        if (currentDialogue != null && currentDialogueTrigger != null)
         {
             if (currentDialogue.afterDialogue == AfterDialogue.ACTIVATE_OBJ)
             {

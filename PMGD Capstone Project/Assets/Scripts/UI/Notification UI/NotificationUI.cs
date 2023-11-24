@@ -16,6 +16,9 @@ public class NotificationUI
     [SerializeField] GameObject slotPrefab;
     [SerializeField] GameObject notificationSlotParent;
 
+    [Header("Audio")]
+    [SerializeField] AudioSource audioSource;
+
     private void Awake()
     {
         if (instance != null)
@@ -61,6 +64,15 @@ public class NotificationUI
 
     public void AddObtainedItemSlot(InventoryItemData item)
     {
+        if(audioSource != null)
+        {
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.Log("OBJ INI TIDAK ADA AUDIO: " + gameObject.name);
+        }
+
         GameObject obj = Instantiate(slotPrefab);
         obj.transform.SetParent(notificationSlotParent.transform, false);
 

@@ -18,14 +18,20 @@ public class CutsceneManager : MonoBehaviour
     public GameObject[] afcutObjToSetActive;
     public GameObject[] afcutObjToSetInactive;
 
-    [Header("Requirment")]
+    [Header("Disable Player Audio Listener")]
+    public bool isDisablePlayerAudioListener;
     public AudioListener playerAudioListener;
+    
+    [Header("Requirment")]
     [SerializeField] DialogueManager dialogueManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerAudioListener = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioListener>();
+        if (isDisablePlayerAudioListener)
+        {
+            playerAudioListener = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioListener>();
+        }
     }
 
     // Update is called once per frame
@@ -39,7 +45,10 @@ public class CutsceneManager : MonoBehaviour
         if (!isLiveScene)
         {
             PlayerStats.instance.isPlayerInteract = true;
-            playerAudioListener.enabled = false;
+            if (isDisablePlayerAudioListener)
+            {
+                playerAudioListener.enabled = false;
+            }
         }
 
         if (isHasDialogue)
@@ -69,7 +78,10 @@ public class CutsceneManager : MonoBehaviour
         if (!isLiveScene)
         {
             PlayerStats.instance.isPlayerInteract = false;
-            playerAudioListener.enabled = true;
+            if (isDisablePlayerAudioListener)
+            {
+                playerAudioListener.enabled = true;
+            }
         }
 
         //Looping untuk mengaktifkan obj setelah cutscene

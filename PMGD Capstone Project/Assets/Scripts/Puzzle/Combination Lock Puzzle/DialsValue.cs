@@ -9,6 +9,9 @@ public class DialsValue : MonoBehaviour
 
     [SerializeField] GameObject[] dialNumber;
 
+    [Header("Audio")]
+    [SerializeField] AudioSource audioSource;
+
     PuzzleStats puzzleStats;
 
     // Start is called before the first frame update
@@ -33,6 +36,11 @@ public class DialsValue : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if(audioSource != null)
+        {
+            audioSource.Play();
+        }
+
         dialsValue++;
 
         if (dialsValue > 9)

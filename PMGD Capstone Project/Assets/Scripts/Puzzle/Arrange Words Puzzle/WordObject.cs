@@ -7,6 +7,9 @@ public class WordObject : MonoBehaviour
     public int order;
     public bool isMove;
 
+    [Header("Audio")]
+    [SerializeField] AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +24,11 @@ public class WordObject : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
+
         isMove = true;
     }
 }
