@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] Slider BGMSlider;
     [SerializeField] Slider SFXSlider;
 
+    [Header("Debug")]
+    [SerializeField] bool pauseInput;
+
     private void Awake()
     {
         if (instance != null)
@@ -33,7 +36,16 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        float pauseInputValue = InputManager.inputSystem.UI.Pause.ReadValue<float>();
+        if (pauseInputValue > 0 && !pauseInput)
+        {
+            PauseGame();
+            pauseInput = true;
+        }
+        else if (pauseInputValue == 0)
+        {
+            pauseInput = false;
+        }
     }
 
     public void ChangeScene(string sceneName)
