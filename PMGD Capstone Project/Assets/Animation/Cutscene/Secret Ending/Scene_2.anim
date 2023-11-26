@@ -158,7 +158,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 4
-        value: 49
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -671,7 +671,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 4
-        value: 49
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -899,9 +899,9 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0
-    functionName: EndDialogue
+    functionName: SetTypingSpeed
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
+    floatParameter: 0.02
     intParameter: 0
     messageOptions: 0

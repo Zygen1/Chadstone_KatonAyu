@@ -1817,6 +1817,6 @@ AnimationClip:
     functionName: SetTypingSpeed
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0.17
+    floatParameter: 0.05
     intParameter: 0
     messageOptions: 0
