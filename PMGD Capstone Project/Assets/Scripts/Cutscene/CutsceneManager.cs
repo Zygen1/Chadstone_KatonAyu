@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class Teleporting
+{
+    public GameObject obj;
+    public Transform tpPos;
+}
+
 public class CutsceneManager : MonoBehaviour
 {
     [Header("Atribut")]
@@ -22,6 +29,10 @@ public class CutsceneManager : MonoBehaviour
     [Header("Disable Player Audio Listener")]
     public bool isDisablePlayerAudioListener;
     public AudioListener playerAudioListener;
+
+    [Header("Teleport Obj After Cutscene")]
+    [SerializeField] bool isTeleporting;
+    [SerializeField] Teleporting[] teleports;
     
     [Header("Requirment")]
     [SerializeField] DialogueManager dialogueManager;
@@ -95,6 +106,14 @@ public class CutsceneManager : MonoBehaviour
         for (int i = 0; i < afcutObjToSetInactive.Length; i++)
         {
             afcutObjToSetInactive[i].SetActive(false);
+        }
+
+        if (isTeleporting)
+        {
+            for(int i = 0; i < teleports.Length; i++)
+            {
+                teleports[i].obj.transform.position = teleports[i].tpPos.position;
+            }
         }
     }
 
