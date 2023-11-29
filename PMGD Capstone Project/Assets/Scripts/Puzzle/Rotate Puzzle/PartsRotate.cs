@@ -18,13 +18,14 @@ public class PartsRotate : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (audioSource != null)
-        {
-            audioSource.Play();
-        }
+        
 
         if (!stats.isDone)
         {
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
             // Rotasi objek pada sumbu Z sebanyak rotateValue.
             transform.Rotate(0f, 0f, rotateValue);
         }
