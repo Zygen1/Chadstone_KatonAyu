@@ -7725,6 +7725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingBGM: {fileID: 8300000, guid: 04063ce77a079f84996dd4308d1231ed, type: 3}
+  freezingMat: {fileID: 2100000, guid: 332a07e22b2aa2d44b68f0c581de31fa, type: 2}
   howToPlayPanel: {fileID: 220980060}
   instruksiKey1OffBtn: {fileID: 2099258002}
   instruksiKey1OnBtn: {fileID: 430165019}
@@ -17068,7 +17069,7 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 458d9ce687633ca4591cd922b602a0a1, type: 2}
   BGM: {fileID: 839594490}
   SFX: {fileID: 480807363}
-  uiButton: {fileID: 8300000, guid: 1ab900af337591340a75dc330200db35, type: 3}
+  uiButton: {fileID: 8300000, guid: 347376c000ea1644586a442b497f2e1e, type: 3}
   BGMSlider: {fileID: 949365967}
   SFXSlider: {fileID: 1792424529}
 --- !u!4 &2054294526

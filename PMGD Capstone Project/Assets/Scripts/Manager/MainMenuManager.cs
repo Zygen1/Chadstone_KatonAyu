@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
+    [Header("Setup")]
     [SerializeField] AudioClip startingBGM;
+    [SerializeField] Material freezingMat;
 
     [Header("Instruksi Panel")]
     [SerializeField] GameObject howToPlayPanel;
@@ -32,6 +34,7 @@ public class MainMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        freezingMat.SetFloat("_FullscreenIntensity", 0);
         SoundManager.instance.changeMusic(startingBGM);
         DataManager.instance.LoadData();
     }

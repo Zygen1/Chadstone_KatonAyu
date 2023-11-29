@@ -149,6 +149,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        StopTyping();
         if (audioSource != null)
         {
             audioSource.Stop();
