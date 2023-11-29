@@ -995,3 +995,10 @@ AnimationClip:
     floatParameter: 0.035
     intParameter: 0
     messageOptions: 0
+  - time: 0
+    functionName: ChangeMusic
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: 9ccded8ec361d8a40b048914d1f6aecf, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

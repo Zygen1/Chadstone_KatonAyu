@@ -447,7 +447,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ACHIEVEMENT
+  m_text: PENCAPAIAN
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e2b2f19c7b557e3459afb1b9916ef75c, type: 2}
   m_sharedMaterial: {fileID: 2246443200773322689, guid: e2b2f19c7b557e3459afb1b9916ef75c, type: 2}
@@ -2284,7 +2284,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HOW TO PLAY
+  m_text: CARA BERMAIN
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e2b2f19c7b557e3459afb1b9916ef75c, type: 2}
   m_sharedMaterial: {fileID: 2246443200773322689, guid: e2b2f19c7b557e3459afb1b9916ef75c, type: 2}
@@ -5307,7 +5307,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SETTING
+  m_text: PENGATURAN
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e2b2f19c7b557e3459afb1b9916ef75c, type: 2}
   m_sharedMaterial: {fileID: 2246443200773322689, guid: e2b2f19c7b557e3459afb1b9916ef75c, type: 2}
@@ -7027,7 +7027,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3239428202472580217, guid: 458d9ce687633ca4591cd922b602a0a1, type: 2}
-  m_audioClip: {fileID: 8300000, guid: b0809802a23d17d4a90e787528775e6e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 04063ce77a079f84996dd4308d1231ed, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -7304,7 +7304,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: NEW GAME
+  m_text: MULAI
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e2b2f19c7b557e3459afb1b9916ef75c, type: 2}
   m_sharedMaterial: {fileID: 2246443200773322689, guid: e2b2f19c7b557e3459afb1b9916ef75c, type: 2}
@@ -7724,6 +7724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f9c05d1f01dad749be63b1b14a1239a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingBGM: {fileID: 8300000, guid: 04063ce77a079f84996dd4308d1231ed, type: 3}
   howToPlayPanel: {fileID: 220980060}
   instruksiKey1OffBtn: {fileID: 2099258002}
   instruksiKey1OnBtn: {fileID: 430165019}
@@ -11246,7 +11247,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CONTINUE
+  m_text: LANJUTKAN
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e2b2f19c7b557e3459afb1b9916ef75c, type: 2}
   m_sharedMaterial: {fileID: 2246443200773322689, guid: e2b2f19c7b557e3459afb1b9916ef75c, type: 2}
@@ -16357,7 +16358,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: EXIT
+  m_text: KELUAR
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e2b2f19c7b557e3459afb1b9916ef75c, type: 2}
   m_sharedMaterial: {fileID: 2246443200773322689, guid: e2b2f19c7b557e3459afb1b9916ef75c, type: 2}

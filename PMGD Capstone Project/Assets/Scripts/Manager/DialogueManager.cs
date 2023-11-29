@@ -23,7 +23,7 @@ public class DialogueManager : MonoBehaviour
     CutsceneManager currentCutsceneManager;
 
     [Header("Audio")]
-    [SerializeField] AudioSource audioSource;
+    public AudioSource audioSource;
 
     bool nextDialogueInput;
     private void Awake()
@@ -140,6 +140,11 @@ public class DialogueManager : MonoBehaviour
             dialogue.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
+    }
+
+    public void StopTyping()
+    {
+        StopAllCoroutines();
     }
 
     public void EndDialogue()

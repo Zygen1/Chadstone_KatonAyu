@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
+    [SerializeField] AudioClip startingBGM;
+
     [Header("Instruksi Panel")]
     [SerializeField] GameObject howToPlayPanel;
     [SerializeField] GameObject instruksiKey1OffBtn;
@@ -30,6 +32,7 @@ public class MainMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SoundManager.instance.changeMusic(startingBGM);
         DataManager.instance.LoadData();
     }
 

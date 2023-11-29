@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [SerializeField] AudioClip startingBGM;
     public GameObject pausePanel;
     [SerializeField] Slider BGMSlider;
     [SerializeField] Slider SFXSlider;
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SoundManager.instance.changeMusic(startingBGM);
         pausePanel.SetActive(false);
     }
 

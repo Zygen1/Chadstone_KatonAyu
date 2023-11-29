@@ -123,6 +123,11 @@ public class CutsceneManager : MonoBehaviour
         animator.SetBool("NextState", false);
     }
 
+    public void StopTyping()
+    {
+        dialogueManager.StopTyping();
+    }
+
     public void SetTypingSpeed(float speed)
     {
         dialogueManager.typingSpeed = speed;
