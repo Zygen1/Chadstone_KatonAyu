@@ -66,6 +66,10 @@ public class DialogueTrigger : MonoBehaviour
         if (isCutsceneDialogue)
         {
             DialogueManager cutsceneDialogueManager = GetComponentInParent<DialogueManager>();
+            if(cutsceneDialogueManager != null)
+            {
+                Debug.Log("Daptet Boy");
+            }
             cutsceneDialogueManager.StartCutsceneDialogue(dialogue[currentDialogue], this, GetComponent<Animator>(), GetComponent<CutsceneManager>());
         }
         else

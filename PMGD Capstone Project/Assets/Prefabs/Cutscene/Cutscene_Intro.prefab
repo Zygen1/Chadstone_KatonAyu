@@ -388,15 +388,15 @@ GameObject:
   - component: {fileID: 809223457971119036}
   - component: {fileID: 7876418443083737738}
   - component: {fileID: 1635557434736127611}
-  - component: {fileID: 6602909112568126494}
   - component: {fileID: 2970079615082853639}
+  - component: {fileID: 6602909112568126494}
   m_Layer: 5
   m_Name: Cutscene_Intro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5015735860085497606
 RectTransform:
   m_ObjectHideFlags: 0
@@ -512,40 +512,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6602909112568126494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1235298367400953052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89b9546399a8112448693ce659edd9e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isCutsceneDialogue: 0
-  triggerMethod: 0
-  currentDialogue: 0
-  dialogue:
-  - name: 
-    sentences:
-    - Panel 1, lorem ipsum dolor sit amet tak setlit yoch qithrod kat me
-    - Panel 2, lorem ipsum dolor sit amet tak setlit yoch qithrod kat me
-    - Panel 3, lorem ipsum dolor sit amet tak setlit yoch qithrod kat me
-    - Panel 4, lorem ipsum dolor sit amet tak setlit yoch qithrod kat me
-    - Panel 5, lorem ipsum dolor sit amet tak setlit yoch qithrod kat me
-    - Panel 6, lorem ipsum dolor sit amet tak setlit yoch qithrod kat me
-    - Panel 7, lorem ipsum dolor sit amet tak setlit yoch qithrod kat me
-    - Panel 8, lorem ipsum dolor sit amet tak setlit yoch qithrod kat me
-    - Panel 9, lorem ipsum dolor sit amet tak setlit yoch qithrod kat me
-    - Panel 10, lorem ipsum dolor sit amet tak setlit yoch qithrod kat me
-    - Panel 11, lorem ipsum dolor sit amet tak setlit yoch qithrod kat me
-    afterDialogue: 0
-    isForceStart: 0
-    objToActivate: {fileID: 0}
-    itemName: 
-  interactableObject: {fileID: 0}
 --- !u!114 &2970079615082853639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,12 +526,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLiveScene: 0
   isHasDialogue: 1
+  dialogueTriggers: []
+  onDialogueEndRunAfcut: 1
   befcutObjToSetActive: []
-  befcutObjToSetInactive: []
-  afcutObjToSetActive: []
+  befcutObjToSetInactive:
+  - {fileID: 0}
+  - {fileID: 0}
+  afcutObjToSetActive:
+  - {fileID: 0}
+  - {fileID: 0}
   afcutObjToSetInactive:
   - {fileID: 1235298367400953052}
+  isDisablePlayerAudioListener: 0
   playerAudioListener: {fileID: 0}
+  dialogueManager: {fileID: 0}
+--- !u!114 &6602909112568126494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235298367400953052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89b9546399a8112448693ce659edd9e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCutsceneDialogue: 1
+  triggerMethod: 0
+  currentDialogue: 0
+  dialogue:
+  - name: 
+    sentences:
+    - Deru angin beserta sinar senja di sebuah pinggiran kota kembali menemani aktivitas
+      yang sudah aku lakukan semenjak 2 tahun lalu.
+    - Menjadi seorang Stalker, atau bisa disebut penguntit adalah cara pengecut bagi
+      sebagian orang.
+    - Namun bagiku hanya inilah jalan satu - satunya agar aku tetap bisa dekat dengan
+      laki - laki yang kusuka..
+    - Wira.
+    - Mungkin karena aku sendiri merasa kurang percaya diri dengan penampilanku,
+      andai saja aku punya sebuah permohonan yang akan dikabulkan. Aku hanya ingin
+      terlihat cantik di matanya.
+    - Bau harum tubuhnya,  indah tingkah lakunya, dan senyumnya yang manis... GEMES
+      BANGET WOIILAH WIRA !!!
+    - Sampai pada tikungan terakhir perjalanan pulang, tak sengaja aku menginjak
+      sebuah kertas. kertas yang kotor dan lusuh.
+    afterDialogue: 0
+    isForceStart: 0
+    nextDialogue: 0
+    objToActivate: {fileID: 0}
+    itemName: 
+  checkFirst: 0
+  interactableObject: {fileID: 0}
 --- !u!1 &2115736086828828970
 GameObject:
   m_ObjectHideFlags: 0

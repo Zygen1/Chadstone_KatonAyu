@@ -8,6 +8,7 @@ TagManager:
   - Equipment
   - DialoguableObject
   - DialogueManager
+  - Enemy
   layers:
   - Default
   - TransparentFX

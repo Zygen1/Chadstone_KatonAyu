@@ -21,4 +21,9 @@ public class BasicAnimationEvent : MonoBehaviour
 
         Debug.Log("BASIC ANIM EVENT: Change Scene");
     }
+
+    public void TeleportObject(GameObject obj, Transform tpPos)
+    {
+        Debug.Log("BASIC ANIM EVENT: Change Scene");
+    }
 }

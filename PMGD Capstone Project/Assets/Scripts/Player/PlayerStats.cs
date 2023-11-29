@@ -54,4 +54,20 @@ public class PlayerStats : MonoBehaviour
             LevelManager.instance.isGameOver = true;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            LevelManager.instance.isGameOver = true;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Enemy"))
+        {
+            LevelManager.instance.isGameOver = true;
+        }
+    }
 }

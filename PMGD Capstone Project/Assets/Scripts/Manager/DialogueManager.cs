@@ -103,7 +103,7 @@ public class DialogueManager : MonoBehaviour
         if (audioSource != null)
         {
             audioSource.Stop();
-            Debug.Log("AUDIO PLAY");
+            //Debug.Log("AUDIO PLAY");
         }
 
         if (sentences.Count == 0)
@@ -115,7 +115,7 @@ public class DialogueManager : MonoBehaviour
         if(isDialogueCutscene)
         {
             currentCutsceneAnimator.SetBool("NextState", true);
-            Debug.Log("lanjut state");
+            //Debug.Log("lanjut state");
         }
 
         string sentence = sentences.Dequeue();
@@ -142,7 +142,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void EndDialogue()
+    public void EndDialogue()
     {
         if (audioSource != null)
         {

@@ -16,10 +16,13 @@ public class CutsceneTrigger : MonoBehaviour
     }
     private void Update()
     {
-        if (interactableObject.isInteracted)
+        if (interactTrigger)
         {
-            cutscene.SetActive(true);
-            interactableObject.StopInteract();
+            if (interactableObject.isInteracted)
+            {
+                cutscene.SetActive(true);
+                interactableObject.StopInteract();
+            }
         }
     }
 

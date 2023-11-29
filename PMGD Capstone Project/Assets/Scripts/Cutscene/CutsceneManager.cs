@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class Teleporting
+{
+    public GameObject obj;
+    public Transform tpPos;
+}
+
 public class CutsceneManager : MonoBehaviour
 {
     [Header("Atribut")]
@@ -9,6 +16,7 @@ public class CutsceneManager : MonoBehaviour
 
     [Header("Is Has Dialogue")]
     [SerializeField] bool isHasDialogue;
+    [SerializeField] DialogueTrigger[] dialogueTriggers;
     public bool onDialogueEndRunAfcut;
 
     [Header("Before Cutscene")]
@@ -21,6 +29,10 @@ public class CutsceneManager : MonoBehaviour
     [Header("Disable Player Audio Listener")]
     public bool isDisablePlayerAudioListener;
     public AudioListener playerAudioListener;
+
+    [Header("Teleport Obj After Cutscene")]
+    [SerializeField] bool isTeleporting;
+    [SerializeField] Teleporting[] teleports;
     
     [Header("Requirment")]
     [SerializeField] DialogueManager dialogueManager;
@@ -53,8 +65,8 @@ public class CutsceneManager : MonoBehaviour
 
         if (isHasDialogue)
         {
-            DialogueTrigger dialogueTrigger = GetComponent<DialogueTrigger>();
-            dialogueTrigger.TriggerDialogue();
+            /*DialogueTrigger dialogueTrigger = GetComponent<DialogueTrigger>();
+            dialogueTrigger.TriggerDialogue();*/
             dialogueManager = GetComponentInParent<DialogueManager>();
         }
 
@@ -95,6 +107,14 @@ public class CutsceneManager : MonoBehaviour
         {
             afcutObjToSetInactive[i].SetActive(false);
         }
+
+        if (isTeleporting)
+        {
+            for(int i = 0; i < teleports.Length; i++)
+            {
+                teleports[i].obj.transform.position = teleports[i].tpPos.position;
+            }
+        }
     }
 
     public void StopState()
@@ -106,5 +126,15 @@ public class CutsceneManager : MonoBehaviour
     public void SetTypingSpeed(float speed)
     {
         dialogueManager.typingSpeed = speed;
+    }
+
+    public void StartDialogue(int dialogueNo)
+    {
+        dialogueTriggers[dialogueNo].TriggerDialogue();
+    }
+
+    public void EndDialogue()
+    {
+        dialogueManager.EndDialogue();
     }
 }
