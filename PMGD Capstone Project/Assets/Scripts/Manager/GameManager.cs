@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(sceneName);
         SoundManager.instance.UIClickSfx();
     }
@@ -80,5 +81,22 @@ public class GameManager : MonoBehaviour
     {
         float volume = SFXSlider.value;
         SoundManager.instance.ChangeSFXVolumeFromAnotherScript(volume);
+    }
+
+    public void RestartGame()
+    {
+        DataManager.instance.ResetData();
+    }
+
+    public void GoodEndingIsUnlock()
+    {
+        DataManager.instance.goodEndingUnlock = true;
+        DataManager.instance.SaveData();
+    }
+
+    public void SecretEndingIsUnlock()
+    {
+        DataManager.instance.secretEndingUnlock = true;
+        DataManager.instance.SaveData();
     }
 }
