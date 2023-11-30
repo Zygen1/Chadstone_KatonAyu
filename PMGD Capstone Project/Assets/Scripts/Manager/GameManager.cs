@@ -53,7 +53,8 @@ public class GameManager : MonoBehaviour
     public void ChangeScene(string sceneName)
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(sceneName);
+        /*SceneManager.LoadScene(sceneName);*/
+        LoadingScreen.instance.LoadScene(sceneName);
         SoundManager.instance.UIClickSfx();
     }
 

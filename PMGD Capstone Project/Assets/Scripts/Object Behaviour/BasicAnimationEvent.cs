@@ -10,9 +10,9 @@ public class BasicAnimationEvent : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
-        if(loadingScreen.instance != null)
+        if(LoadingScreen.instance != null)
         {
-            loadingScreen.instance.LoadScene(sceneName);
+            LoadingScreen.instance.LoadScene(sceneName);
         }
         else
         {
