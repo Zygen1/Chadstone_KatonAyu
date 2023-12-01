@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SaveTrigger : MonoBehaviour
 {
+    public GameObject saveIndicator;
+
     [Header("Choose One")]
     [SerializeField] bool room1Clear;
     [SerializeField] bool room2Clear;
@@ -25,6 +27,7 @@ public class SaveTrigger : MonoBehaviour
             if (room4Clear) { DataManager.instance.isRoom4Unlock = true; }
 
             DataManager.instance.SaveData();
+            saveIndicator.SetActive(true);
             gameObject.SetActive(false);
         }
     }
