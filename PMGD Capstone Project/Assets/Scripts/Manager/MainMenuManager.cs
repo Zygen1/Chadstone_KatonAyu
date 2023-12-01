@@ -50,7 +50,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void ChangeScene(string scene_name)
     {
-        loadingScreen.instance.LoadScene(scene_name);
+        LoadingScreen.instance.LoadScene(scene_name);
         SoundManager.instance.UIClickSfx();
     }
 
