@@ -25,6 +25,9 @@ public class DialogueManager : MonoBehaviour
     [Header("Audio")]
     public AudioSource audioSource;
 
+    [Header("Status")]
+    public bool isCanContinueDialogue;
+
     bool nextDialogueInput;
     private void Awake()
     {
@@ -34,20 +37,24 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isCanContinueDialogue = true;
         sentences = new Queue<string>();
     }
 
     private void Update()
     {
-        float nextDialogueInputValue = InputManager.inputSystem.Player.NextDialogue.ReadValue<float>();
-        if(nextDialogueInputValue > 0 && !nextDialogueInput)
+        if (isCanContinueDialogue)
         {
-            nextDialogueInput = true;
-            DisplayNextSentence();
-        }
-        else if(nextDialogueInputValue == 0)
-        {
-            nextDialogueInput = false;
+            float nextDialogueInputValue = InputManager.inputSystem.Player.NextDialogue.ReadValue<float>();
+            if (nextDialogueInputValue > 0 && !nextDialogueInput)
+            {
+                nextDialogueInput = true;
+                DisplayNextSentence();
+            }
+            else if (nextDialogueInputValue == 0)
+            {
+                nextDialogueInput = false;
+            }
         }
     }
 
