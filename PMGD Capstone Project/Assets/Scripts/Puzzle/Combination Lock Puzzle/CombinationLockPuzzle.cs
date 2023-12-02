@@ -29,7 +29,7 @@ public class CombinationLockPuzzle : MonoBehaviour
         if (CheckCombination())
         {
             puzzleStats.isDone = true;
-            Debug.Log("bisa");
+            //Debug.Log("bisa");
         }
     }
 

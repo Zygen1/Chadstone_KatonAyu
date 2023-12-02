@@ -82,6 +82,7 @@ public class CutsceneManager : MonoBehaviour
             befcutObjToSetInactive[i].SetActive(false);
         }
 
+        GameManager.instance.isCutsceneActive = true;
         Debug.Log("BEFVCU");
     }
 
@@ -115,6 +116,8 @@ public class CutsceneManager : MonoBehaviour
                 teleports[i].obj.transform.position = teleports[i].tpPos.position;
             }
         }
+
+        GameManager.instance.isCutsceneActive = false;
     }
 
     public void StopState()

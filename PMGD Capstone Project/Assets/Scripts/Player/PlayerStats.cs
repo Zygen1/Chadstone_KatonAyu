@@ -51,7 +51,7 @@ public class PlayerStats : MonoBehaviour
         
         if(currentFreezing >= 9.9f)
         {
-            LevelManager.instance.isGameOver = true;
+            LevelManager.instance.isGameOver2 = true;
         }
     }
 
@@ -59,7 +59,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            LevelManager.instance.isGameOver = true;
+            LevelManager.instance.isGameOver1 = true;
         }
     }
 
@@ -67,7 +67,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (collision.collider.CompareTag("Enemy"))
         {
-            LevelManager.instance.isGameOver = true;
+            LevelManager.instance.isGameOver1 = true;
         }
     }
 }

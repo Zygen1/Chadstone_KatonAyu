@@ -125,8 +125,6 @@ public class DataManager : MonoBehaviour
         isRoom2Unlock = false;
         isRoom3Unlock = false;
         isRoom4Unlock = false;
-        secretEndingUnlock = false;
-        goodEndingUnlock = false;
 
         if (itemPickedStatus != null)
         {
@@ -147,6 +145,15 @@ public class DataManager : MonoBehaviour
         }
         SaveData();
         Debug.Log("Data Reset");
+    }
+
+    [ContextMenu("Reset Ending Data")]
+    public void ResetEndingData()
+    {
+        secretEndingUnlock = false;
+        goodEndingUnlock = false;
+        SaveData();
+        Debug.Log("Ending Data Reset");
     }
 
     [ContextMenu("Display Dictionary")]

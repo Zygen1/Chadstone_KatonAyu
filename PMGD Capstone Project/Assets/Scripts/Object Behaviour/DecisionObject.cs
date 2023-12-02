@@ -19,7 +19,7 @@ public class DecisionObject : MonoBehaviour
     {
         if (!isActive)
         {
-            
+            DialogueManager.instance.isCanContinueDialogue = false;
             for(int i = 0; i < deactiveObjWhenDecision.Length; i++)
             {
                 deactiveObjWhenDecision[i].SetActive(false);
@@ -54,6 +54,11 @@ public class DecisionObject : MonoBehaviour
     public void TriggerObjectButton(InteractableObject io)
     {
         io.isInteracted = true;
+    }
+
+    public void CanContinueDialogue()
+    {
+        DialogueManager.instance.isCanContinueDialogue = true;
     }
 
     public void PlayerStopInteract()

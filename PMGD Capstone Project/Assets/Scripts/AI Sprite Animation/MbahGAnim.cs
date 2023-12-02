@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class MbahGAnim : MonoBehaviour
 {
     private SpriteRenderer targetSprite;
     private EnemyAI enemyAI;
+    private AIDestinationSetter ai;
     private Animator animator;
     private float horizontalPosition;
     private float verticalPosition;
@@ -17,6 +19,7 @@ public class MbahGAnim : MonoBehaviour
         targetSprite = GetComponentInParent<SpriteRenderer>();
         enemyAI = GetComponentInParent<EnemyAI>();
         animator = GetComponentInParent<Animator>();
+        ai = GetComponentInParent<AIDestinationSetter>();
     }
 
     void FixedUpdate()

@@ -23,9 +23,12 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] GameObject settingPanel;
 
     [Header("Pencapaian Panel")]
+    [SerializeField] GameObject scrollContainer;
     [SerializeField] GameObject pencapaianPanel;
+    [SerializeField] GameObject achievmentsIsNull;
     [SerializeField] GameObject fullStoryPanel;
     [SerializeField] GameObject[] endingList;
+    [SerializeField] GameObject[] detailEndingList;
 
     [Header("Slider For Sound Effect")]
     [SerializeField] Slider BGMSlider;
@@ -47,8 +50,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void ChangeScene(string scene_name)
     {
-        Debug.Log("Clicked");
-        loadingScreen.instance.LoadScene(scene_name);
+        LoadingScreen.instance.LoadScene(scene_name);
         SoundManager.instance.UIClickSfx();
     }
 
@@ -95,6 +97,43 @@ public class MainMenuManager : MonoBehaviour
     {
         pencapaianPanel.SetActive(true);
         SoundManager.instance.UIClickSfx();
+        float resizeScrollContainer = endingList.Length - 1;
+        if (DataManager.instance.goodEndingUnlock)
+        {
+            endingList[0].SetActive(true);
+        }
+        else
+        {
+            endingList[0].SetActive(false);
+            resizeScrollContainer -= 1;
+        }
+        if (DataManager.instance.secretEndingUnlock)
+        {
+            endingList[1].SetActive(true);
+        }
+        else
+        {
+            endingList[1].SetActive(false);
+            resizeScrollContainer -= 1;
+        }
+
+        if (resizeScrollContainer >= 1)
+        {
+            endingList[2].SetActive(true);
+            resizeScrollContainer += 1;
+            achievmentsIsNull.SetActive(false);
+        }
+        else
+        {
+            endingList[2].SetActive(false);
+            achievmentsIsNull.SetActive(true);
+        }
+
+        var rectTransform = scrollContainer.GetComponent<RectTransform>();
+        if (rectTransform != null)
+        {
+            rectTransform.sizeDelta = new Vector2(1920, resizeScrollContainer * 380 + 10);
+        }
     }
 
     public void Setting()
@@ -142,7 +181,7 @@ public class MainMenuManager : MonoBehaviour
     public void CheckFullStory(GameObject ending)
     {
         fullStoryPanel.SetActive(true);
-        foreach (GameObject go in endingList)
+        foreach (GameObject go in detailEndingList)
         {
             if (ending == go)
             {
@@ -156,7 +195,7 @@ public class MainMenuManager : MonoBehaviour
     public void BackToAchievments()
     {
         fullStoryPanel.SetActive(false);
-        foreach (GameObject go in endingList)
+        foreach (GameObject go in detailEndingList)
         {
             go.SetActive(false);
         }

@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class loadingScreen : MonoBehaviour
+public class LoadingScreen : MonoBehaviour
 {
-    public static loadingScreen instance;
+    public static LoadingScreen instance;
 
     public GameObject loadingPanel;
     public Image loadingBarFill;
@@ -19,19 +19,24 @@ public class loadingScreen : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         StartCoroutine(LoadSceneAsync(sceneName));
+        Debug.Log("Loading Showed 1");
     }
 
     IEnumerator LoadSceneAsync(string sceneName)
     {
+        Debug.Log("Loading Showed 2");
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
 
         loadingPanel.SetActive(true);
 
         while (!operation.isDone)
         {
+            Debug.Log("Loading Showed 3");
             float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
             loadingBarFill.fillAmount = progressValue;
             yield return null;
         }
+
+        Debug.Log("Loading Showed 4");
     }
 }

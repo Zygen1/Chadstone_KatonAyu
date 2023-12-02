@@ -21,8 +21,10 @@ public class LevelManager : MonoBehaviour
     public InventoryItemData[] itemsData;
 
     [Header("Gameover")]
-    public bool isGameOver;
-    public GameObject gameOverPanel;
+    public bool isGameOver1;
+    public bool isGameOver2;
+    public GameObject gameOverPanel1;
+    public GameObject gameOverPanel2;
 
     private void Awake()
     {
@@ -40,7 +42,8 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameOverPanel.SetActive(isGameOver);
+        gameOverPanel1.SetActive(isGameOver1);
+        gameOverPanel2.SetActive(isGameOver2);
     }
 
     [ContextMenu("SetData")]

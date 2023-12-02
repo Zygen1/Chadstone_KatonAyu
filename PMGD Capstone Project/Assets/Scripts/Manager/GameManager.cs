@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] bool pauseInput;
+    public bool isCutsceneActive;
 
     private void Awake()
     {
@@ -38,22 +39,27 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float pauseInputValue = InputManager.inputSystem.UI.Pause.ReadValue<float>();
-        if (pauseInputValue > 0 && !pauseInput)
+        if (!isCutsceneActive)
         {
-            PauseGame();
-            pauseInput = true;
+            float pauseInputValue = InputManager.inputSystem.UI.Pause.ReadValue<float>();
+            if (pauseInputValue > 0 && !pauseInput)
+            {
+                PauseGame();
+                pauseInput = true;
+            }
+            else if (pauseInputValue == 0)
+            {
+                pauseInput = false;
+            }
         }
-        else if (pauseInputValue == 0)
-        {
-            pauseInput = false;
-        }
+
     }
 
     public void ChangeScene(string sceneName)
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(sceneName);
+        /*SceneManager.LoadScene(sceneName);*/
+        LoadingScreen.instance.LoadScene(sceneName);
         SoundManager.instance.UIClickSfx();
     }
 
