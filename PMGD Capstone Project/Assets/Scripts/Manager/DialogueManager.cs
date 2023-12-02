@@ -138,11 +138,11 @@ public class DialogueManager : MonoBehaviour
             if(audioSource != null)
             {
                 audioSource.Play();
-                Debug.Log("AUDIO PLAY");
+                //Debug.Log("AUDIO PLAY");
             }
             else
             {
-                Debug.Log("No Audio");
+                Debug.LogWarning("No Audio");
             }
             dialogue.text += letter;
             yield return new WaitForSeconds(typingSpeed);

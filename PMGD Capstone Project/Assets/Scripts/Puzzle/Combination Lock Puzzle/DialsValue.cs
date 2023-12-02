@@ -48,6 +48,6 @@ public class DialsValue : MonoBehaviour
             dialsValue = 0;
         }
 
-        Debug.Log("pencet");
+        //Debug.Log("pencet");
     }
 }

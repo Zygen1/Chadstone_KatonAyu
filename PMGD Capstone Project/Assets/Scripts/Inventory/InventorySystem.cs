@@ -63,7 +63,7 @@ public class InventorySystem : MonoBehaviour
             onInventoryChangeEvent.Invoke();
         }
 
-        Debug.Log("ItemAdded");
+        //Debug.Log("ItemAdded");
     }
 
     public void Remove(InventoryItemData referenceData)

@@ -41,6 +41,7 @@ public class ObjectNeedItem : MonoBehaviour
 
     [Header("Status")]
     private bool isDone;
+    private bool playerHaveItem;
 
     private void Start()
     {
@@ -66,7 +67,14 @@ public class ObjectNeedItem : MonoBehaviour
         {
             if (!isDone)
             {
-                HandleSearchItem();
+                if(HandleSearchItem() == false)
+                {
+                    Debug.Log("ITEM IS NOT COMPLETE");
+                }
+                else
+                {
+                    HandleUseItem();
+                }
             }
 
             /*interactableObject.StopInteract();*/
@@ -77,7 +85,20 @@ public class ObjectNeedItem : MonoBehaviour
         }
     }
 
-    private void HandleSearchItem()
+    private bool HandleSearchItem()
+    {
+        for (int i = 0; i < itemName.Length; i++)
+        {
+            if (InventorySystem.instance.SearchItemInInventory(itemName[i]) == false)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void HandleUseItem()
     {
         for (int i = 0; i < itemName.Length; i++)
         {
