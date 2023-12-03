@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEditor;
 
 public class InventorySystem : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class InventorySystem : MonoBehaviour
 
     private Dictionary<InventoryItemData, InventoryItem> m_itemDictionary;
 
+    [Header("DUMMY")]
+    [SerializeField] InventoryItemData dummyItemData;
+
     private void Awake()
     {
         instance = this;
@@ -24,6 +28,7 @@ public class InventorySystem : MonoBehaviour
 
     private void Start()
     {
+        Add(dummyItemData);
         StartCoroutine(DelayStartingItem());
     }
 

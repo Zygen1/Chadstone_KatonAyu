@@ -18,4 +18,7 @@ public class InventoryItemData : ScriptableObject
 
     public bool isAnEquipment;
     public string equipmentName;
+
+    [Header("DUMMY")]
+    public bool isADummy;
 }
