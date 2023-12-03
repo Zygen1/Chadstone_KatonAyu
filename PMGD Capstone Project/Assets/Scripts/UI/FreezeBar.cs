@@ -9,6 +9,9 @@ public class FreezeBar : MonoBehaviour
     [SerializeField] Slider slider;
     [SerializeField] Material freezinMaterial;
 
+    /*[Header("Audio")]
+    [SerializeField] AudioSource freezinAudioSource;*/
+
     [Header("Debug")]
     [SerializeField] float freezePrecentage;
     Color matColor;
@@ -30,5 +33,10 @@ public class FreezeBar : MonoBehaviour
 
         slider.value = freezePrecentage;
         freezinMaterial.SetFloat("_FullscreenIntensity", freezePrecentage);
+
+        /*if(freezinAudioSource != null)
+        {
+            freezinAudioSource.time = freezinAudioSource.clip.length * freezePrecentage;
+        }*/
     }
 }

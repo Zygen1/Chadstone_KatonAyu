@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isCutsceneActive)
+        if (!isCutsceneActive && !PlayerStats.instance.isPlayerInteract && !PlayerStats.instance.isPlayerDialogue)
         {
             float pauseInputValue = InputManager.inputSystem.UI.Pause.ReadValue<float>();
             if (pauseInputValue > 0 && !pauseInput)

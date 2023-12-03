@@ -21,12 +21,14 @@ public class DialogueManager : MonoBehaviour
     DialogueTrigger currentDialogueTrigger;
     Animator currentCutsceneAnimator;
     CutsceneManager currentCutsceneManager;
+    string currentSentence;
 
     [Header("Audio")]
     public AudioSource audioSource;
 
     [Header("Status")]
     public bool isCanContinueDialogue;
+    [SerializeField] bool typingIsDone;
 
     bool nextDialogueInput;
     private void Awake()
@@ -49,7 +51,7 @@ public class DialogueManager : MonoBehaviour
             if (nextDialogueInputValue > 0 && !nextDialogueInput)
             {
                 nextDialogueInput = true;
-                DisplayNextSentence();
+                NextDialogueButton();
             }
             else if (nextDialogueInputValue == 0)
             {
@@ -125,13 +127,15 @@ public class DialogueManager : MonoBehaviour
             //Debug.Log("lanjut state");
         }
 
-        string sentence = sentences.Dequeue();
+        //string sentence = sentences.Dequeue();
+        currentSentence = sentences.Dequeue();
         StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
+        StartCoroutine(TypeSentence(currentSentence));
     }
 
     IEnumerator TypeSentence(string sentence)
     {
+        typingIsDone = false;
         dialogue.text = "";
         foreach(char letter in sentence.ToCharArray())
         {
@@ -146,6 +150,26 @@ public class DialogueManager : MonoBehaviour
             }
             dialogue.text += letter;
             yield return new WaitForSeconds(typingSpeed);
+        }
+        typingIsDone = true;
+    }
+
+    void TypeSentenceInstant(string sentence)
+    {
+        dialogue.text = sentence;
+        typingIsDone = true;
+    }
+
+    public void NextDialogueButton()
+    {
+        if (!typingIsDone)
+        {
+            StopTyping();
+            TypeSentenceInstant(currentSentence);
+        }
+        else
+        {
+            DisplayNextSentence();
         }
     }
 
