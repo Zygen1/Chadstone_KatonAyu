@@ -10,6 +10,13 @@ public class WordObject : MonoBehaviour
     [Header("Audio")]
     [SerializeField] AudioSource audioSource;
 
+    PuzzleStats stats;
+
+    private void Awake()
+    {
+        stats = GetComponentInParent<PuzzleStats>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,11 +31,14 @@ public class WordObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (audioSource != null)
+        if (!stats.isDone)
         {
-            audioSource.Play();
-        }
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
 
-        isMove = true;
+            isMove = true;
+        }
     }
 }

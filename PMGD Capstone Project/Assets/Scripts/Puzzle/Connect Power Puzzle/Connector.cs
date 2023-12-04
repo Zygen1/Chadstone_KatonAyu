@@ -25,9 +25,12 @@ public class Connector : MonoBehaviour
 
     private void OnMouseDown()
     {
-        ConnectPowerPuzzle.instance.connected = true;
-        ConnectPowerPuzzle.instance.deactivateObject.SetActive(false);
-        ConnectPowerPuzzle.instance.activateObject.SetActive(true);
-        transform.Rotate(0f, 0f, 90f);
+        if (!stats.isDone)
+        {
+            ConnectPowerPuzzle.instance.connected = true;
+            ConnectPowerPuzzle.instance.deactivateObject.SetActive(false);
+            ConnectPowerPuzzle.instance.activateObject.SetActive(true);
+            transform.Rotate(0f, 0f, 90f);
+        }
     }
 }

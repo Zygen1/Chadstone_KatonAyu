@@ -36,18 +36,21 @@ public class DialsValue : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(audioSource != null)
+        if (!puzzleStats.isDone)
         {
-            audioSource.Play();
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
+
+            dialsValue++;
+
+            if (dialsValue > 9)
+            {
+                dialsValue = 0;
+            }
+
+            //Debug.Log("pencet");
         }
-
-        dialsValue++;
-
-        if (dialsValue > 9)
-        {
-            dialsValue = 0;
-        }
-
-        //Debug.Log("pencet");
     }
 }

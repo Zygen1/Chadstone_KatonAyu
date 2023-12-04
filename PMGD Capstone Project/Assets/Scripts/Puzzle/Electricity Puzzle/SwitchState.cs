@@ -11,6 +11,13 @@ public class SwitchState : MonoBehaviour
     public bool isUp;
     public bool isOn;
 
+    PuzzleStats stats;
+
+    private void Awake()
+    {
+        stats = GetComponentInParent<PuzzleStats>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,29 +38,32 @@ public class SwitchState : MonoBehaviour
 
     private void OnMouseDown()
     {
-        isUp = !isUp;
-        isOn = !isOn;
+        if (!stats.isDone)
+        {
+            isUp = !isUp;
+            isOn = !isOn;
 
-        if (isUp == true)
-        {
-            switchUp.SetActive(true);
-            switchDown.SetActive(false);
-        }
-        else
-        {
-            switchUp.SetActive(false);
-            switchDown.SetActive(true);
-        }
+            if (isUp == true)
+            {
+                switchUp.SetActive(true);
+                switchDown.SetActive(false);
+            }
+            else
+            {
+                switchUp.SetActive(false);
+                switchDown.SetActive(true);
+            }
 
-        lightsOn.SetActive(isOn);
+            lightsOn.SetActive(isOn);
 
-        if (isOn)
-        {
-            ElectricityPuzzle.Instance.SwitchChange(1);
-        }
-        else
-        {
-            ElectricityPuzzle.Instance.SwitchChange(-1);
+            if (isOn)
+            {
+                ElectricityPuzzle.Instance.SwitchChange(1);
+            }
+            else
+            {
+                ElectricityPuzzle.Instance.SwitchChange(-1);
+            }
         }
     }
 }
