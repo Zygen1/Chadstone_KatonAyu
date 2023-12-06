@@ -18,6 +18,9 @@ public class PlayerStats : MonoBehaviour
     public bool isPlayerDialogue;
     public bool isPlayerFreezing;
 
+    [Header("Disable Mobile Control While Interact")]
+    public GameObject mobileControl;
+
     private void Awake()
     {
         instance = this;
@@ -53,6 +56,9 @@ public class PlayerStats : MonoBehaviour
         {
             LevelManager.instance.isGameOver2 = true;
         }
+
+        //Mobile Control
+        mobileControl.SetActive(!isPlayerInteract);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
