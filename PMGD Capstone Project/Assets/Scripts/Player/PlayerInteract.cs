@@ -8,6 +8,7 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] float interactRange = 2.0f;
     [SerializeField] GameObject[] interactableObjects;
     [SerializeField] GameObject currentInteractableOBJ;
+    [SerializeField] GameObject interactIcon;
 
     [SerializeField] bool interactInput;
 
@@ -56,6 +57,17 @@ public class PlayerInteract : MonoBehaviour
             {
                 interactInput = false;
             }
+        }
+
+        //Interact icon
+        if(currentInteractableOBJ != null)
+        {
+            interactIcon.SetActive(true);
+            interactIcon.transform.position = currentInteractableOBJ.transform.position;
+        }
+        else
+        {
+            interactIcon.SetActive(false);
         }
     }
 

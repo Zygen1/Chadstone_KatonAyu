@@ -8,6 +8,8 @@ public class StaminaBar : MonoBehaviour
     [SerializeField] PlayerStats playerStats;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] Slider slider;
+    [SerializeField] Image bg;
+    [SerializeField] Image fill;
 
     // Start is called before the first frame update
     void Start()
@@ -22,5 +24,16 @@ public class StaminaBar : MonoBehaviour
     {
         float staminaPercentage = playerMovement.currentStamina / playerStats.maxStamina;
         slider.value = staminaPercentage;
+
+        if(staminaPercentage >= 1)
+        {
+            bg.enabled = false;
+            fill.enabled = false;
+        }
+        else if(staminaPercentage < 1)
+        {
+            bg.enabled = true;
+            fill.enabled = true;
+        }
     }
 }

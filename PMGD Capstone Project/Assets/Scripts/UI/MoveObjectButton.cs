@@ -13,7 +13,28 @@ public class MoveObjectButton : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     [SerializeField] Vector2 dir;
     [SerializeField] float maxVertical;
 
+    [SerializeField] Vector2 moveInput;
+
     private bool isPointerDown = false;
+
+    private void Update()
+    {
+        moveInput = InputManager.inputSystem.Player.Move.ReadValue<Vector2>();
+        if(moveInput.y > 0)
+        {
+            if (objToMove.transform.localPosition.y > maxVertical)
+            {
+                objToMove.transform.Translate(dir * speed * Time.deltaTime);
+            }
+        }
+        else if(moveInput.y < 0)
+        {
+            if (objToMove.transform.localPosition.y < maxVertical - 0.1f)
+            {
+                objToMove.transform.Translate(dir * speed * Time.deltaTime);
+            }
+        }
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
